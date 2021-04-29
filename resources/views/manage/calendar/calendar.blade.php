@@ -43,7 +43,7 @@
                     <th>First name</th>
                     <th>Last name</th>
                     <th>User name</th>
-                    <th>Delete</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>

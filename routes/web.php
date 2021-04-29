@@ -16,7 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('manage.calendar.calendar');
+    return view('manage.course.course');
 });
 
  //manage
