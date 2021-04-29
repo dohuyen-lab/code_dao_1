@@ -27,7 +27,8 @@ Route::get('/logout', 'BaseController@logout')->name('logout');
 Route::group(['prefix'=>'manager'], function () { //, 'middleware'=>'auth'
     Route::get('/', [ManageController::class, 'index'])->name('manager.index');
 });
-Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');
+Route::get('/manage/listStudent', [ManageController::class, 'getListStudent'])->name('getListStudent');
+Route::get('/manage/listTeacher', [ManageController::class, 'getListTeacher'])->name('getListTeacher');
 
 //student
 Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');

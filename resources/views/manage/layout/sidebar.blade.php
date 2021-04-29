@@ -26,8 +26,8 @@
           </span>
                 <div class="multi-level collapse " role="list" id="submenu-app" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link" href=""><span>Students</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href=""><span>Teachers</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('getListStudent')}}"><span>Students</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('getListTeacher')}}"><span>Teachers</span></a></li>
                     </ul>
                 </div>
             </li>

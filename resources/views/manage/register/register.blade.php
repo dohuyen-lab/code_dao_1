@@ -1,4 +1,4 @@
-@extends('student.layout.master')
+@extends('manage.layout.master')
 @section('category', 'Contact')
 @section('title','Student Calenda')
 @section('content')
