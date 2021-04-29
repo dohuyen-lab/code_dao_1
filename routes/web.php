@@ -19,7 +19,13 @@ Route::get('/', function () {
     return view('manage.calendar.calendar');
 });
 
+Route::get('/login', 'BaseController@login')->name('login');
+Route::post('/login', 'BaseController@postLogin')->name('post.login');
+Route::get('/logout', 'BaseController@logout')->name('logout');
  //manage
+Route::group(['prefix'=>'manager'], function () { //, 'middleware'=>'auth'
+    Route::get('/', [ManageController::class, 'index'])->name('manager.index');
+});
 Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');
 
 //student
