@@ -16,7 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('manage.calendar.calendar');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');

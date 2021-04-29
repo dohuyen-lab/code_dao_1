@@ -45,7 +45,6 @@
     <link type="text/css" href="{{asset('css/volt.css')}}" rel="stylesheet">
     <link type="text/css" href="{{asset('css/style.css')}}" rel="stylesheet">
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
-
 </head>
 
 <body>
