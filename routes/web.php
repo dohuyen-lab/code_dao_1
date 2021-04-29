@@ -21,7 +21,7 @@ Route::get('/', function () {
 
     // return view('manage.course.course');
 
-    return view('teacher.cours.listcours');
+    return view('manage.register.register');
 
 });
 
@@ -46,9 +46,12 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
 
 
 //student
-Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
-Route::get('/student/cours', [StudentController::class, 'getListCours'])->name('getListCours');
+Route::group(['prefix'=>'student'], function () { //, 'middleware'=>'auth'
+    Route::get('/', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
+    Route::get('/cours', [StudentController::class, 'getListCoursStudent'])->name('getListCoursStudent');
+    Route::post('/delete/{id}', [StudentController::class, 'postdeleteCours'])->name('postdeleteCours');
 
+});
 //teacher
 
 // Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
