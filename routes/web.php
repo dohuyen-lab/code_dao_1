@@ -16,7 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('manage.calendar.calendar');
+    return view('login.login');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -38,7 +38,9 @@ Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('
 
 //student
 Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
+Route::get('/student/cours', [StudentController::class, 'getListCours'])->name('getListCours');
 
 //teacher
 Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
+Route::get('/teacher/cours', [TeacherController::class, 'getListCours'])->name('getListCours');
 
