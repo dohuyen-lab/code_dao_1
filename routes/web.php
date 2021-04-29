@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ManageController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,3 +21,12 @@ Route::get('/', function () {
 
 Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
+ //manage
+Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');
+
+//student
+Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
+
+//teacher
+Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
+
