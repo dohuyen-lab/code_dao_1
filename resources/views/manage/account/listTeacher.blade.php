@@ -27,15 +27,19 @@
                 </thead>
                 <tbody>
                 @foreach($teacher as $key => $t)
+                    <form action="{{url('/manager/delete/'.$t->id)}}" method="POST" >
+                        @csrf
                     <tr>
                         <th scope="row">{{$key + 1}}</th>
                         <td>{{$t->nom}}</td>
                         <td>{{$t->prenom}}</td>
+                        <td>{{$t->login}}</td>
                         <td>{{$t->intitule}}</td>
                         <td>
-                            <button>Delete</button>
+                            <button type="submit">Delete</button>
                         </td>
                     </tr>
+                    </form>
                 @endforeach
                 </tbody>
             </table>

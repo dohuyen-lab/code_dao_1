@@ -16,19 +16,28 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    // return view('manage.course.course');
-    return view('manage.register.register');
+    return view('login.login');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
 Route::get('/logout', 'BaseController@logout')->name('logout');
  //manage
-Route::group(['prefix'=>'manager'], function () { //, 'middleware'=>'auth'
+Route::group(['prefix'=>'manager'/*, 'middleware'=>'auth'*/], function () { //, 'middleware'=>'auth'
     Route::get('/', [ManageController::class, 'index'])->name('manager.index');
+    Route::get('/register', [ManageController::class, 'register'])->name('manager.register');
+    Route::post('/register', [ManageController::class, 'postRegister'])->name('manager.post_register');
+
+    //formations
+    Route::resource('formations', 'FormationController');
+    // teacher
+    Route::get('/listStudent', [ManageController::class, 'getListStudent'])->name('getListStudent');
+    Route::get('/listTeacher', [ManageController::class, 'getListTeacher'])->name('getListTeacher');
+    Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
+
+    //student
 });
-Route::get('/manage/listStudent', [ManageController::class, 'getListStudent'])->name('getListStudent');
-Route::get('/manage/listTeacher', [ManageController::class, 'getListTeacher'])->name('getListTeacher');
+
 
 //student
 Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');

@@ -17,7 +17,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>STT</th>
                     <th>First name</th>
                     <th>Last name</th>
                     <th>User name</th>
@@ -27,15 +27,19 @@
                 </thead>
                 <tbody>
                 @foreach($student as $key => $s)
+                    <form action="{{url('/manager/delete/'.$s->id)}}" method="POST" >
+                        @csrf
                     <tr>
                         <th scope="row">{{$key + 1}}</th>
                         <td>{{$s->nom}}</td>
                         <td>{{$s->prenom}}</td>
+                        <td>{{$s->login}}</td>
                         <td>{{$s->intitule}}</td>
                         <td>
-                            <button>Delete</button>
+                            <button type="submit">Delete</button>
                         </td>
                     </tr>
+                    </form>
                 @endforeach
                 </tbody>
             </table>
