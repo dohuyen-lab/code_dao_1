@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CourController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ use App\Http\Controllers\StudentController;
 Route::get('/', function () {
 
     // return view('manage.course.course');
-    return view('manage.register.register');
+    return view('teacher.cours.listcours');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -38,9 +39,11 @@ Route::get('/student/cours', [StudentController::class, 'getListCours'])->name('
 
 // Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
 
-Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
-Route::get('/teacher/cours', [TeacherController::class, 'getListCours'])->name('getListCours');
 
-// Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
-//     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
-// });
+Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
+    Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
+    Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
+    Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
+    Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
+
+});
