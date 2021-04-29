@@ -16,7 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
