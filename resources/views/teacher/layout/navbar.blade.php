@@ -17,6 +17,7 @@
                         <div class="media d-flex align-items-center">
                             <img class="user-avatar md-avatar rounded-circle" alt="Image placeholder" src="">
                             <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
+
                                 <span class="mb-0 font-small font-weight-bold">hhhh</span>
                             </div>
                         </div>

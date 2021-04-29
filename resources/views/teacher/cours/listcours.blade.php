@@ -45,26 +45,37 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>STT</th>
-                <th>Course Title</th>
-                <th>Date start</th>
-                <th>Date end</th>
-                <th>Status</th>
+                <th>Serial</th>
+                <th>Intitule</th>
+                <th>Formation</th>
+                <th>Date Debut</th>
+                <th>Date Fin</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            {{--            @foreach($cours as $key => $c)--}}
-            {{--                <tr>--}}
-            {{--                    <th scope="row">{{$key + 1}}</th>--}}
-            {{--                    <td>{{$c->intitule}}</td>--}}
-            {{--                    <td>{{$c->date_debut}}</td>--}}
-            {{--                    <td>{{$c->date_fin}}</td>--}}
-            {{--                    <td>--}}
-            {{--                        <button>Delete</button>--}}
-            {{--                    </td>--}}
-            {{--                </tr>--}}
-            {{--            @endforeach--}}
-            </tbody>
+            <tr>
+                @if(!empty($cours))
+                    @foreach($cours as $key => $c)
+                        <tr>
+                            <th scope="row">{{$key + 1}}</th>
+                            <td>{{$c->intitule}}</td>
+                            <td>{{$c->Fintitule}}</td>
+                            <td>{{$c->date_debut}}</td>
+                            <td>{{$c->date_fin}}</td> 
+                            <td>
+                                <form method="POST" action="{{route('deleteCours')}}">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <input type="text" value="{{$c->id}}" name="id" hidden>
+                                        <input type="submit" class="btn btn-danger" value="deltete" >
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody> 
         </table>
 
 @endsection
