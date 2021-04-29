@@ -18,10 +18,14 @@ class TeacherController extends Controller
                 ->join('formations','cours.formation_id','=','formations.id')
                 ->get();
 
-        return view('teacher.listcours',[
+        return view('teacher.cours.listcours',[
             'cours'=> $list
         ]);
     }
 
-    
+    public function getTeacherCalendar(){
+        return view('teacher.calendar.calendar');
+    }
+
+
 }

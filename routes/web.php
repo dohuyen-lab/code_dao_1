@@ -16,7 +16,9 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('login.login');
+
+    // return view('manage.course.course');
+    return view('manage.register.register');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -30,10 +32,15 @@ Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('
 
 //student
 Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
+Route::get('/student/cours', [StudentController::class, 'getListCours'])->name('getListCours');
 
 //teacher
+
 // Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
 
-Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
-    Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
-});
+Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
+Route::get('/teacher/cours', [TeacherController::class, 'getListCours'])->name('getListCours');
+
+// Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
+//     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
+// });
