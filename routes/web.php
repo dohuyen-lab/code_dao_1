@@ -23,7 +23,7 @@ Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
 Route::get('/logout', 'BaseController@logout')->name('logout');
  //manage
-Route::group(['prefix'=>'manager'/*, 'middleware'=>'auth'*/], function () { //, 'middleware'=>'auth'
+Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
     Route::get('/', [ManageController::class, 'index'])->name('manager.index');
     Route::get('/register', [ManageController::class, 'register'])->name('manager.register');
     Route::post('/register', [ManageController::class, 'postRegister'])->name('manager.post_register');
@@ -34,7 +34,7 @@ Route::group(['prefix'=>'manager'/*, 'middleware'=>'auth'*/], function () { //, 
 
     //student
 });
-Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');
+Route::get('/manager/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');
 
 //student
 Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');

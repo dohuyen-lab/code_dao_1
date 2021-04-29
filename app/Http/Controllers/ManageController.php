@@ -13,6 +13,11 @@ class ManageController extends Controller
 {
     //
     public function index() {
+
+        if (!Session::has('user')){
+            return redirect('/login');
+        }
+
         return view('manage.index');
     }
 
