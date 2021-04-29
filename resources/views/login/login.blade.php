@@ -31,9 +31,9 @@
                     <input type="password" class="form-control mb-1" placeholder="Password">
                   </div>
                 </div>
-                <div class="row mt-4">
-                  <div class="col">
-                    <button class="btn btn-outline-secondary" type="button">Submit</button>
+                <div class="row mt-10 ">
+                  <div class="col" style="display: flex">
+                    <button class="btn btn-outline-secondary " type="button">Submit</button>
                   </div>
                 </div>
               </div>

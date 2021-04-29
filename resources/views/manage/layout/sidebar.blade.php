@@ -17,56 +17,33 @@
             </div>
         </div>
         <ul class="nav flex-column">
-            <li class="nav-item  active ">
-                <a href="" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
-                    <span>Trang chủ</span>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a href="" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
-                    <span>Tài khoản</span>
-                </a>
-            </li>
             <li class="nav-item">
           <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-app">
             <span>
-              <span class="sidebar-icon"><span class="fas fa-table"></span></span>
-              Bài đăng
+              User Management
             </span>
             <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
           </span>
                 <div class="multi-level collapse " role="list" id="submenu-app" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link" href=""><span>Danh sách bài đăng</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href=""><span>Thêm bài đăng</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href=""><span>Students</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href=""><span>Teachers</span></a></li>
                     </ul>
                 </div>
             </li>
-            <li class="nav-item ">
-                <a href="" class="nav-link">
-                    <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
-                    <span>Yêu cầu</span>
-                </a>
-            </li>
-
             <li class="nav-item">
           <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
             <span>
-              <span class="sidebar-icon"><span class="far fa-file-alt"></span></span>
-              Giao dịch
+                Course Management
             </span>
-            <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
-          </span>
-                <div class="multi-level collapse " role="list" id="submenu-pages" aria-expanded="false">
-                    <ul class="flex-column nav">
-                        <li class="nav-item"><a class="nav-link" href=""><span>Quản lý ví</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href=""><span>Giao dịch chờ xử lí</span></a></li>
-                        <li class="nav-item"><a class="nav-link" href="{"><span>Lịch sử giao dịch</span></a></li>
-                    </ul>
-                </div>
             </li>
+
+            <li class="nav-item ">
+                <a href="" class="nav-link">
+                    <span>Create user account</span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </nav>
