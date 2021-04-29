@@ -19,7 +19,7 @@ use App\Http\Controllers\CourController;
 Route::get('/', function () {
 
     // return view('manage.course.course');
-    return view('teacher.cours.listcours');
+    return view('teacher.cours.cours');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -45,5 +45,6 @@ Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
     Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
+    Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
 
 });
