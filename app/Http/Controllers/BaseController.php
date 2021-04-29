@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class BaseController extends Controller
 {
@@ -17,18 +18,18 @@ class BaseController extends Controller
     public function postLogin(Request $request) {
         $this->validate($request,
         [
-            'password' => 'min:8|required'
+            'mdp' => 'min:8|required'
         ],
         [
-            'password.min' => 'Password must be longer than 8 characters'
+            'mdp.min' => 'Password must be longer than 8 characters'
         ]
         );
 
-        $username = $request->username;
-        $password = $request->password;
+        $check = DB::table('users')->where(['login' => $request->login], ['mdp'=>$request->mdp])->get();
 
-        if ( Auth::attempt(['login' => $username, 'mdp' => $password])) {
-            return redirect('/');
+        if ( $check ) {
+            Session::push('user', $check);
+            return redirect('/manager');
         } else {
             // Kiểm tra không đúng sẽ hiển thị thông báo lỗi
 			Session::flash('error', 'Username or password is incorrect!');
