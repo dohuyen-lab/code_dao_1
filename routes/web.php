@@ -16,7 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('login.login');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -32,5 +32,8 @@ Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('
 Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
 
 //teacher
-Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
+// Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
 
+Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
+    Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
+});
