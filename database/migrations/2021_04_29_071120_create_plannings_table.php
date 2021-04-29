@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormationsTable extends Migration
+class CreatePlanningsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateFormationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('formations', function (Blueprint $table) {
+        Schema::create('plannings', function (Blueprint $table) {
             $table->increments('id')->nullable(false);
-            $table->string('intitule', 50)->nullable(false);
-            $table->boolean('deleted_at');
+            $table->integer('cours_id')->unsigned()->nullable(false);
+            $table->dateTime('date_debut');
+            $table->dateTime('date_fin');
+
             $table->timestamps();
+
+            $table->foreign('cours_id')->references('id')->on('cours');
         });
     }
 
@@ -28,6 +32,6 @@ class CreateFormationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('formations');
+        Schema::dropIfExists('plannings');
     }
 }
