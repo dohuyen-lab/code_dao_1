@@ -16,7 +16,8 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
-    return view('login.login');
+    // return view('login.login');
+    return view('manage.calendar.calendar');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -28,10 +29,13 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/register', [ManageController::class, 'register'])->name('manager.register');
     Route::post('/register', [ManageController::class, 'postRegister'])->name('manager.post_register');
 
-    //formations
-    Route::resource('formations', 'FormationController');
-    // teacher
+    //formations -> khoá học.
+    Route::resource('formations', 'FormationController')->except([
+        'create', 'show', 'edit', 'update'
+    ]);
+    //cours -> lớp học
 
+    // teacher
     //student
 });
 Route::get('/manager/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');

@@ -26,16 +26,18 @@
           </span>
                 <div class="multi-level collapse " role="list" id="submenu-app" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link" href=""><span>Students</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href=""><span>Teachers</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="#"><span>Students</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="#"><span>Teachers</span></a></li>
                     </ul>
                 </div>
             </li>
             <li class="nav-item">
-          <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
-            <span>
-                Course Management
-            </span>
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
+                <a href="{{route('formations.index')}}" class="nav-link">
+                    <span>
+                        Course Management
+                    </span>
+                </a>
             </li>
 
             <li class="nav-item ">
