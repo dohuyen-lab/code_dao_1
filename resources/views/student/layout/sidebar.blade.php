@@ -24,13 +24,7 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="{{route('getListCours')}}" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
-                    <span>Registration</span>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a href="" class="nav-link">
+                <a href="{{route('getListCoursStudent')}}" class="nav-link">
                     <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
                     <span>Course</span>
                 </a>
