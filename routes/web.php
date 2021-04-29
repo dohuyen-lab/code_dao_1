@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 
     // return view('manage.course.course');
+
     return view('teacher.cours.listcours');
 
 });
@@ -28,7 +29,7 @@ Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
 Route::get('/logout', 'BaseController@logout')->name('logout');
  //manage
-Route::group(['prefix'=>'manager'/*, 'middleware'=>'auth'*/], function () { //, 'middleware'=>'auth'
+Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
     Route::get('/', [ManageController::class, 'index'])->name('manager.index');
     Route::get('/register', [ManageController::class, 'register'])->name('manager.register');
     Route::post('/register', [ManageController::class, 'postRegister'])->name('manager.post_register');
@@ -58,5 +59,6 @@ Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
     Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
+    Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
 
 });
