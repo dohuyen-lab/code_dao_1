@@ -16,6 +16,7 @@ use App\Http\Controllers\StudentController;
 */
 
 Route::get('/', function () {
+    // return view('manage.course.course');
     return view('manage.register.register');
 });
 
