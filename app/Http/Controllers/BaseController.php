@@ -31,7 +31,7 @@ class BaseController extends Controller
             return redirect('/');
         } else {
             // Kiểm tra không đúng sẽ hiển thị thông báo lỗi
-			Session::flash('error', 'Email or password is incorrect!');
+			Session::flash('error', 'Username or password is incorrect!');
 			return redirect('login');
         }
     }
