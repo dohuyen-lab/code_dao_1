@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 use App\User;
 
 class ManageController extends Controller
 {
     //
+    public function index() {
+        return view('manage.index');
+    }
     public function getListStudent() {
         $data =[];
         $student = DB::table('users')
@@ -58,9 +62,11 @@ class ManageController extends Controller
         [
             'username' => 'unique:users,login',
             'password' => 'min:8',
+            'type' => 'required',
         ],
         [
             'username.unique' => 'User name already exists.',
+            'type.required' => 'Must choose the user type.',
             'password.min' => 'Password must be longer than 8 characters',
         ]
         );

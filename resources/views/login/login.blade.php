@@ -47,12 +47,12 @@
                         </div>
                         <div class="row mt-4">
                         <div class="col">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required>
+                            <input type="text" class="form-control" name="login" placeholder="Username" required>
                         </div>
                         </div>
                         <div class="row mt-4">
                         <div class="col">
-                            <input type="password" class="form-control mb-1" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control mb-1" name="mdp" placeholder="Password" required>
                         </div>
                         </div>
                         <div class="row mt-4">
