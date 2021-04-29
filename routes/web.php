@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', 'BaseController@login')->name('login');
+Route::post('/login', 'BaseController@postLogin')->name('post.login');
  //manage
 Route::get('/manage/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');
 
