@@ -7,18 +7,21 @@
                 <form class="navbar-search form-inline" id="navbar-search-main">
                     <div class="input-group input-group-merge search-bar">
                         <span class="input-group-text" id="topbar-addon"><span class="fas fa-search"></span></span>
-                        <input type="text" class="form-control" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
-                    </div>
-                </form>
+                        <input type="text" class="form-control w-75" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                   </div>
+              </form>
             </div>
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item dropdown">
-
+                    <a class="nav-link text-dark mr-lg-3 icon-notifications" data-unread-notifications="true" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link pt-1 px-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="media d-flex align-items-center">
                             <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
-                                 <span class="mb-0 font-small font-weight-bold">hhhh</span>
+                                <span class="mb-0 font-small font-weight-bold"> Username </span>
                             </div>
                         </div>
                     </a>
