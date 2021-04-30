@@ -96,16 +96,28 @@ class ManageController extends Controller
         return redirect()->back();
     }
 
-    public function getRequest(Request $request){
+    public function getRequest(){
         $r = DB::table('users')
-                ->join('formations', 'users.formation_id','=','formation.id')
                 ->where('type', '=', null)
                 ->get();
         
         return view('',[
             'requests' => $r
         ]);
-        }
+    }
+
+    public function acceptRequest(Request $request){
+        $user_id = $request['user_id'];
+        $type = $request['type'];
+        if($type == 0) $type = 'etudiant';
+            else $type = 'enseignant';
+
+        DB::table('users')
+            ->where('id', $user_id)
+            ->update(['type' => $type]);
+        return $this->getRequest();
+    }
+
     public function postCourse(Request $request) {
 
         $intitule = $request['intitule'];

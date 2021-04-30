@@ -28,7 +28,12 @@ class BaseController extends Controller
         ]
         );
 
-        $user = DB::table('users')->where('login', '=', $request->login)->get();
+        $user = DB::table('users')
+                    ->where([
+                        ['login', '=', $request->login],
+                        ['type', '<>', null]
+                        ])
+                    ->get();
 
         if ( Hash::check($request->mdp, $user[0]->mdp) ) {
             Session::push('user', $user);

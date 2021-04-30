@@ -21,32 +21,34 @@
                     <th>First name</th>
                     <th>Last name</th>
                     <th>User name</th>
-                    <th>Formation</th>
                     <th>Type</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
+                @if(!empty($r))
                 @foreach($r as $key => $s)
-                    <form action="{{url('/manager/accept/'.$s->id)}}" method="POST" >
+                    <form action="{{url('/manager/accept/')}}" method="POST" >
                         @csrf
+                        <input name="user_id" id="user_id" value="{{$s->id}}" hidden>
                     <tr>
                         <th scope="row">{{$key + 1}}</th>
                         <td>{{$s->nom}}</td>
                         <td>{{$s->prenom}}</td>
                         <td>{{$s->login}}</td>
-                        <td>{{$s->intitule}}</td>
                         <td>
                         <select name="type" id="type" class="form-control" required="required">
-                            <option value=""></option>
+                            <option value="0" selected>Student</option>
+                            <option value="1">Teacher</option>
                         </select>
                         </td>
                         <td>
-                            <button type="submit">Delete</button>
+                            <button type="submit">Accept</button>
                         </td>
                     </tr>
                     </form>
                 @endforeach
+                @endif
                 </tbody>
             </table>
 

@@ -52,6 +52,12 @@
                 </a>
             </li>
 
+            <li class="nav-item ">
+                <a href="{{route('manager.request')}}" class="nav-link">
+                    <span>Request</span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </nav>
