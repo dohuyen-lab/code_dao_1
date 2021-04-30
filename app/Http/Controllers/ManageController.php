@@ -148,4 +148,8 @@ class ManageController extends Controller
 
         return redirect()->back();
     }
+
+    public function search(Request $request){
+        
+    }
 }
