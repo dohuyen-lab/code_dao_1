@@ -34,6 +34,12 @@
                     <span>Se déconnecter </span>
                 </a>
             </li>
+            <li class="nav-item ">
+                <a href="{{route('getInformation')}}" class="nav-link">
+                    <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
+                    <span>Information</span>
+                </a>
+            </li>
 
         </ul>
     </div>

@@ -58,7 +58,7 @@ class StudentController extends Controller
         $check = DB::table('cours_users')
             ->where('cours_id',$cours->id)
             ->get();
-        if(empty($check)) {
+        if(!empty($check)) {
             $user = Session::get('user');
             $user_id = $user[0][0]->id;
             $cours_user = new Cours_User;
