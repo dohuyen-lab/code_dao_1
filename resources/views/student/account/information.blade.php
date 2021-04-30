@@ -27,7 +27,7 @@
                                     </p>
                                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Chỉnh sửa thông tin</button> -->
                                     <button onclick="editInformation({{$formation->id}})" class="btn btn-primary">Chỉnh sửa thông tin</button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Đổi mật khẩu</button>
+                                    <button onclick="ChangePass()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Đổi mật khẩu</button>
                                 </div>
                             </div>
                         </div>
@@ -107,6 +107,49 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal chỉnh sửa thông tin người dùng  -->
+    <div class="modal fade" id="editPassword">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Chỉnh sửa thông tin người dùng</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="edit_information_form" method="POST"  enctype="multipart/form-data">
+                        @csrf
+                        <input hidden name="idUser" id="idUser" type="text">
+                        <div class="form-group">
+                            <label>current password</label>
+                            <input type="password" name="password" class="form-control" value="">
+                            <small class="error form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>New password</label>
+                            <input type="password" name="newpassword" class="form-control" value="">
+                            <small class="error form-text text-danger"></small>
+                        </div>
+                        <div class="form-group">
+                            <label>Comfirm password</label>
+                            <input type="password" name="password_confirmation" class="form-control" value="">
+                            <small class="error form-text text-danger"></small>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button onclick="submitChangePass()" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Cập nhật</button>
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 <script>
     function editInformation(id){
         event.preventDefault();
@@ -125,6 +168,9 @@
                 console.log(error);
             }
         });
+    }
+    function ChangePass(){
+        $("#editPassword").modal('show');
     }
     function submitEdit(){
         event.preventDefault();
@@ -149,6 +195,35 @@
                 console.log(errors.errors);
                 $.each(errors.errors, function(i, val) {
                     $("#editInformationModal input[name=" + i + "]").siblings('.error').text(val[0]);
+
+                })
+
+            }
+        });
+    }
+    function submitChangePass(){
+        event.preventDefault();
+
+        var data = new FormData($("#editPassword form")[0]);
+
+        $.ajax({
+            url: "{{route('postChangePass')}}",
+            method: 'post',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                $('#editPassword').modal('hide');
+                toastr.success('Sửa thành công!')
+                window.location.reload().delay(500);
+
+            },
+            error: function(error) {
+                var errors = error.responseJSON;
+                console.log(errors.errors);
+                $.each(errors.errors, function(i, val) {
+                    $("#editPassword input[name=" + i + "]").siblings('.error').text(val[0]);
 
                 })
 
