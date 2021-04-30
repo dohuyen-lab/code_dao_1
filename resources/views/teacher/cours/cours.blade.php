@@ -20,7 +20,27 @@
 
     </div>
 
+    <!-- Xep theo Tuan -->
+    <div>
+    @if(!empty($date))
+            <form method="GET" action="{{route('getListCoursWeek')}}">
+                <input name="isnext" value="false" hidden>
+                <button type="submit" name="date" value="{{$date}}">Prevew</button>
+            </form>
+        @endif
 
+        <form method="GET" action="{{route('getListCoursWeek')}}">
+            <button type="submit" name="date" value="0">Sort week</button>
+        </form>
+
+        @if(!empty($date))
+            <form method="GET" action="{{route('getListCoursWeek')}}">
+                <input name="isnext" value="true" hidden>
+                <button type="submit" name="date" value="{{$date}}">Next</button>
+            </form>
+        @endif
+        
+    </div>
 
     <div class="table-settings mb-4">
         <div class="row align-items-center justify-content-between">

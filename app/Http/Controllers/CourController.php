@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -201,5 +202,59 @@ class CourController extends Controller
         DB::table('cours')->where('id','=',$id)->delete();
 
         return $this->getAll();
+    }
+
+    public function getAllWeek(Request $request){
+        $user = Session::get('user');
+        $user_id = $user[0][0]->id;
+
+        $date = $request['date'];
+
+        if($date == 0) {
+            $date = Carbon::now();
+        }else {
+            $isnext = $request['isnext'];
+            if($isnext) $date = $date->addDays(7);
+            else $date = $date->subDays(7); 
+        }
+
+        $user = DB::table('users')
+                    ->where('id','=',$user_id)
+                    ->get();
+
+        if($user[0]->type == 'admin'){
+            $list = DB::table('cours')
+                        ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
+                        ->join('plannings','cours.id','=','plannings.cours_id')
+                        ->join('formations','cours.formation_id','=','formations.id')
+                        ->where([
+                            ['plannings.date_debut','<',$date],
+                            ['plannings.date_fin','>',$date]
+                        ])
+                        ->get();
+            // dd($user);
+        } else{
+            $list = DB::table('cours')
+                        ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
+                        ->join('plannings','cours.id','=','plannings.cours_id')
+                        ->join('formations','cours.formation_id','=','formations.id')
+                        ->where([
+                            ['cours.user_id', '=', $user_id],
+                            ['plannings.date_debut','<',$date],
+                            ['plannings.date_fin','>',$date]
+                            ])
+                        ->get();
+        }
+
+        if ($user[0]->type == 'admin') {
+            return view('manage.course.cours',[
+                'cours'=> $list,
+                'now' => $date
+            ]);
+        }
+        return view('teacher.cours.cours',[
+            'cours'=> $list,
+            'now' => $date
+        ]);
     }
 }
