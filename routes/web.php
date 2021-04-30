@@ -18,7 +18,7 @@ use App\Http\Controllers\InformationController;
 */
 
 Route::get('/', function () {
-    return view('manage.listStudent');
+    return view('login.login');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -78,7 +78,7 @@ Route::group(['prefix'=>'student'], function () { //, 'middleware'=>'auth'
 
 Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
-    Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
+//    Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
     Route::get('/cours/eek', [CourController::class, 'getAllWeek'])->name('getListCoursWeek');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
