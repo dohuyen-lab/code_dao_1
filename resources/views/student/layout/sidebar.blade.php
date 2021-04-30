@@ -7,7 +7,7 @@
                 </div>
                 <div class="d-block">
                     <h2 class="h6">Hi, Jane</h2>
-                    <a href="../../pages/examples/sign-in.html" class="btn btn-secondary text-dark btn-xs"><span class="mr-2"><span class="fas fa-sign-out-alt"></span></span>Sign Out</a>
+                    <a href="../../pages/examples/sign-in.html" class="btn btn-secondary text-dark btn-xs"><span class="mr-2"><span class="fas fa-sign-out-alt"></span></span>Se déconnecter</a>
                 </div>
             </div>
             <div class="collapse-close d-md-none">
@@ -29,18 +29,14 @@
                     <span>Cours</span>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a href="{{route('manager.request')}}" class="nav-link">
-                    <span>Se déconnecter </span>
-                </a>
-            </li>
+            
             <li class="nav-item ">
                 <a href="{{route('getInformation')}}" class="nav-link">
                     <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
-                    <span>Information</span>
+                    <span>Informations</span>
                 </a>
             </li>
-
+            
         </ul>
     </div>
 </nav>
