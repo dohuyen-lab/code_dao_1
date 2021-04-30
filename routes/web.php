@@ -74,6 +74,6 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/cours/store', [CourController::class, 'getStore'])->name('storeCours');
     Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
 
-    Route::get('/cours/edit', [CourController::class, 'getCours'])->name('editCours');
+    Route::get('/cours/edit/{id}', [CourController::class, 'getCourse'])->name('editCours');
     Route::post('/cours/edit', [CourController::class, 'editCours'])->name('updateCours');
 });
