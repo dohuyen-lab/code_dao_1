@@ -123,9 +123,14 @@
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form id="edit_information_form" method="POST"  enctype="multipart/form-data">
+                    <form id="edit_information_form" action="{{route('postChangePass')}}" method="POST"  enctype="multipart/form-data">
                         @csrf
-                        <input hidden name="idUser" id="idUser" type="text">
+                        @if (Session::has('message'))
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                {{Session::get('message')}}
+                            </div>
+                        @endif
+                        <input hidden name="idUser" id="idUser" value="{{$formation->id}}" type="text">
                         <div class="form-group">
                             <label>Mot de passe actuel</label>
                             <input type="password" name="password" class="form-control" value="">
@@ -141,15 +146,14 @@
                             <input type="password" name="password_confirmation" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Cập nhật</button>
+                            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
                     </form>
                 </div>
 
                 <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button onclick="submitChangePass()" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Mettre à jour</button>
-                    <button class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                </div>
-
             </div>
         </div>
     </div>
@@ -179,7 +183,7 @@
         event.preventDefault();
 
         var data = new FormData($("#editInformationModal form")[0]);
-
+        console.log(data);
         $.ajax({
             url: "{{route('postEditInformation')}}",
             method: 'post',
