@@ -47,27 +47,27 @@
                     <div class="fdb-box">
                         <div class="row">
                         <div class="col">
-                            <h1>Log In</h1>
+                            <h1>S’identifier</h1>
                         </div>
                         </div>
                         <div class="row mt-4">
                         <div class="col">
-                            <input type="text" class="form-control" name="login" placeholder="Username" required>
+                            <input type="text" class="form-control" name="login" placeholder="Identifiant" required>
                         </div>
                         </div>
                         <div class="row mt-4">
                         <div class="col">
-                            <input type="password" class="form-control mb-1" name="mdp" placeholder="Password" required>
+                            <input type="password" class="form-control mb-1" name="mdp" placeholder="Mot de passe" required>
                         </div>
                         </div>
                         <div class="row mt-4">
                         <div class="col">
-                            <a href="{{route('signup')}}">Sign up</a>
+                            <a href="{{route('signup')}}">S’inscrire</a>
                         </div>
                         </div>
                         <div class="row mt-4">
                         <div class="col">
-                            <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                            <button class="btn btn-outline-secondary" type="submit">Soumission</button>
                         </div>
                         </div>
                     </div>

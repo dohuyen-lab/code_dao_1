@@ -4,7 +4,7 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
-            <h2 class="h4">Request List</h2>
+            <h2 class="h4">Liste des utilisateurs</h2>
         </div>
 
     </div>
@@ -17,10 +17,10 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Serial</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>User name</th>
+                    <th> N°</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Nom d’utilisateur</th>
                     <th>Type</th>
                     <th>Action</th>
                 </tr>
@@ -38,8 +38,8 @@
                         <td>{{$s->login}}</td>
                         <td>
                         <select name="type" id="type" class="form-control" required="required">
-                            <option value="0" selected>Student</option>
-                            <option value="1">Teacher</option>
+                            <option value="0" selected>Etudiant</option>
+                            <option value="1">Enseignant</option>
                         </select>
                         </td>
                         <td>

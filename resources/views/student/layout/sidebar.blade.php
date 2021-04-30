@@ -20,13 +20,18 @@
             <li class="nav-item  active ">
                 <a href="{{route('getStudentCalendar')}}" class="nav-link">
                     <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
-                    <span>Calendar</span>
+                    <span>Calendrier</span>
                 </a>
             </li>
             <li class="nav-item ">
                 <a href="{{route('getListCoursStudent')}}" class="nav-link">
                     <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
-                    <span>Course</span>
+                    <span>Cours</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a href="{{route('manager.request')}}" class="nav-link">
+                    <span>Se déconnecter </span>
                 </a>
             </li>
 
