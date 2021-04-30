@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="{{ route('manager.register')}}" class="nav-link">
+                <a href="{{route('manager.register')}}" class="nav-link">
                     <span>Create user account</span>
                 </a>
             </li>
