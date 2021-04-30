@@ -70,6 +70,7 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
     Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
+    Route::get('/cours', [CourController::class, 'getAllWeek'])->name('getListCoursWeek');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
     Route::get('/cours/store', [CourController::class, 'getStore'])->name('storeCours');
     Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
