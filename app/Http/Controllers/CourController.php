@@ -9,6 +9,30 @@ use Illuminate\Support\Facades\Session;
 class CourController extends Controller
 {
     //
+
+    public function getStore(){
+        $user = Session::get('user');
+        $user_id = $user[0][0]->id;
+
+        $user = DB::table('users')
+                    ->where('id', $user_id)
+                    ->get();
+        $formation = DB::table('formations')
+                        ->get();
+        
+        if($user->type == "admin"){
+            $user = DB::table('users')
+                        ->where('type', 'enseignant')
+                        ->get();
+        }
+
+        return view('teacher.cours.createcours',[
+            'teachers' => $user,
+            'formations' => $formation,
+            'status' => 0
+        ]);
+    }
+
     public function store(Request $request) {
 
         $intitule = $request['intitule'];
@@ -51,65 +75,55 @@ class CourController extends Controller
                     ->get();
 
         if($user[0]->type == 'admin'){
-            $teacher = DB::table('users')
-                            ->where('type','=','enseignant')
-                            ->get();
-
-            $formation = DB::table('formations')->where('deleted_at', '=', 0)->get();
-
             $list = DB::table('cours')
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
                         ->join('plannings','cours.id','=','plannings.cours_id')
                         ->join('formations','cours.formation_id','=','formations.id')
                         ->get();
         }else{
-
-            $teacher = $user;
-
-            $formation = DB::table('formations')
-                            ->where('id','=',$teacher->formation_id)
-                            ->where('deleted_at', '=', 0)
-                            ->get();
-
             $list = DB::table('cours')
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
                         ->join('plannings','cours.id','=','plannings.cours_id')
                         ->join('formations','cours.formation_id','=','formations.id')
-                        ->where('cours.id', '=', $teacher->id)
+                        ->where('cours.id', '=', $user_id)
                         ->get();
         }
 
         if ($user[0]->type == 'admin') {
             return view('manage.course.cours',[
-                'cours'=> $list,
-                'teachers'=> $teacher,
-                'formations'=> $formation
+                'cours'=> $list
             ]);
         }
         return view('teacher.cours.cours',[
-            'cours'=> $list,
-            'teachers'=> $teacher,
-            'formations'=> $formation
+            'cours'=> $list
         ]);
     }
 
-    public function getCourseByID($id) {
-        $user = Session::get('user');
-
-        $user_type = $user[0][0]->type;
+    public function getCourse(Request $request) {
+        $cour_id = $request['id'];
 
         $cour_edit = DB::table('cours')
-        ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
-        ->join('plannings','cours.id','=','plannings.cours_id')
-        ->join('formations','cours.formation_id','=','formations.id')
-        ->where('cours.id', '=', $id)
-        ->get();
+                        ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin')
+                        ->join('plannings','cours.id','=','plannings.cours_id')
+                        ->where('cours.id', '=', $cour_id)
+                        ->get();
+        $teacher = DB::table('cours')
+                        ->select('users.nom','users.prenom','users.id')
+                        ->join('users','users.id','=','cours.users_id')
+                        ->where('cours.id', '=', $cour_id)
+                        ->get();
+        $formation = DB::table('cours')
+                        ->select('formations.intitule')
+                        ->join('formations','cours.formation_id','=','formations.id')
+                        ->where('cours.id', '=', $cour_id)
+                        ->get();
 
-        if ($user_type == 'admin') {
-
-        } else {
-
-        }
+        return view('teacher.cours.createcours',[
+            'teachers' => $teacher,
+            'formations' => $formation,
+            'status' => 1,
+            'cour' => $cour_edit
+        ]);
     }
 
     public function update(Request $request, $id) {

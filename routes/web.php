@@ -39,6 +39,9 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/cours/{id}', [CourController::class, 'getCourseByID'])->name('manager.edit.course');
     Route::post('/cours/{id}', [CourController::class, 'updateCourseByID'])->name('manager.update.course');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('manager.delete.course');
+
+    Route::get('/accept', [CourController::class, 'getRequest'])->name('manager.request');
+    Route::post('/accept', [CourController::class, 'acceptRequest'])->name('manager.request');
     // teacher
     Route::get('/teacher', [ManageController::class, 'getListTeacher'])->name('manager.teacher');
     //student
@@ -63,6 +66,10 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
+    Route::get('/cours/store', [CourController::class, 'getStore'])->name('storeCours');
     Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
+
+    Route::get('/cours/edit', [CourController::class, 'getCours'])->name('editCours');
+    Route::post('/cours/edit', [CourController::class, 'EditCours'])->name('editCours');
 
 });
