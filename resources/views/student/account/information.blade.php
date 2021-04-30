@@ -115,6 +115,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
+
                     <h4 class="modal-title">Changer mot de passe</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
@@ -216,7 +217,7 @@
                 console.log(data);
                 $('#editPassword').modal('hide');
                 toastr.success('Sửa thành công!')
-                window.location.reload().delay(500);
+                // window.location.reload().delay(500);
 
             },
             error: function(error) {
