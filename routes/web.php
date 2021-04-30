@@ -24,10 +24,8 @@ Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
 Route::get('/logout', 'BaseController@logout')->name('logout');
 
-Route::get('/signup', function(){
-                return view('login.signup');
-            })->name('signup');
-Route::post('/signup', 'BaseController@signup')->name('signup');
+Route::get('/signup', 'BaseController@getSignup')->name('signup');
+Route::post('/signup', 'BaseController@signup')->name('post.signup');
 
  //manage
 Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
@@ -51,6 +49,14 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/teacher', [ManageController::class, 'getListTeacher'])->name('manager.teacher');
     //student
     Route::get('/student', [ManageController::class, 'getListStudent'])->name('manager.student');
+    // delete user
+    Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
+
+    // search
+    Route::get('/search/formation', [ManageController::class, 'searchFormation'])->name('manager.search.formation');
+    Route::get('/search/course', [ManageController::class, 'searchCourse'])->name('manager.search.course');
+    Route::get('/search/student', [ManageController::class, 'searchStudent'])->name('manager.search.student');
+    Route::get('/search/teacher', [ManageController::class, 'searchTeacher'])->name('manager.search.teacher');
 });
 
 

@@ -10,15 +10,12 @@
         @endif
         <div class="d-block mb-4 mb-md-0">
             <h2 class="h4">Courses List</h2>
-            <div class="d-block mb-4 mb-md-0">
-                <h2 class="h4">Student List</h2>
-                <form class="navbar-search form-inline" id="navbar-search-main">
+                <form action="{{route('manager.search.course')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
                     <div class="input-group input-group-merge search-bar">
-                        <span class="input-group-text" id="topbar-addon"><span class="fas fa-search"></span></span>
-                        <input type="text" class="form-control w-75" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="text" class="form-control" id="topbarInputIconLeft" name="search" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="submit" class="btn btn-success form-control" value="Search" style="width:70px;">
                     </div>
                 </form>
-            </div>
         </div>
 
 
@@ -90,6 +87,4 @@
                 @endif
             </tbody>
         </table>
-
-
 @endsection

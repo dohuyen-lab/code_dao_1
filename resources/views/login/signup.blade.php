@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-7 col-xl-5 text-center">
-                <form action="{{route('post.login')}}" method="POST">
+                <form action="{{route('post.signup')}}" method="POST">
                     @csrf
                     @if (Session::has('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -67,6 +67,20 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col">
+
+                                <select name="formation" id="formation" class="form-control" required="required">
+                                @foreach($formations as $key => $f)
+                                    <option value="{{$f->id}}">{{$f->intitule}}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="col">
+                                <a href="{{route('login')}}" >Login</a>
+                            </div>
+                            <div class="col d-block">
                                 <button class="btn btn-outline-secondary" type="submit">Submit</button>
                             </div>
                         </div>

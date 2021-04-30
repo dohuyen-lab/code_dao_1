@@ -6,7 +6,6 @@
                 <a class="btn btn-default" href="{{route('manager.index')}}">
                     Home
                 </a>
-                
             </div>
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
