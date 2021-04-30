@@ -36,7 +36,7 @@
                         <td>{{$s->login}}</td>
                         <td>{{$s->intitule}}</td>
                         <td>
-                            <button type="submit">Delete</button>
+                            <button class="btn btn-danger" type="submit">Delete</button>
                         </td>
                     </tr>
                     </form>

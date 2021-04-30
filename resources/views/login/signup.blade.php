@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-7 col-xl-5 text-center">
-                <form action="{{route('post.login')}}" method="POST">
+                <form action="{{route('post.signup')}}" method="POST">
                     @csrf
                     @if (Session::has('error'))
                         <div class="alert alert-danger alert-dismissible" role="alert">

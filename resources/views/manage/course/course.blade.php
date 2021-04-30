@@ -68,7 +68,7 @@
                     @endif
                 </tbody>
             </table>
-
+            {{$coures->links()}}
         </div>
 
 

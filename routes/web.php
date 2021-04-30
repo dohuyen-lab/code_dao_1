@@ -27,7 +27,7 @@ Route::get('/logout', 'BaseController@logout')->name('logout');
 Route::get('/signup', function(){
                 return view('login.signup');
             })->name('signup');
-Route::post('/signup', 'BaseController@signup')->name('signup');
+Route::post('/signup', 'BaseController@signup')->name('post.signup');
 
  //manage
 Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
@@ -51,6 +51,8 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/teacher', [ManageController::class, 'getListTeacher'])->name('manager.teacher');
     //student
     Route::get('/student', [ManageController::class, 'getListStudent'])->name('manager.student');
+    // delete user
+    Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
 });
 
 

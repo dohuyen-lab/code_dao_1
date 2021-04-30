@@ -35,6 +35,10 @@ class BaseController extends Controller
                         ])
                     ->get();
 
+        if (empty($user[0])) {
+            return redirect()->back()->with(['message'=>'Vous devez attendre la confirmation de l\'inscription.']);
+        }
+
         if ( Hash::check($request->mdp, $user[0]->mdp) ) {
             Session::push('user', $user);
             switch ($user[0]->type) {
@@ -67,15 +71,11 @@ class BaseController extends Controller
         $this->validate($request,
         [
             'mdp' => 'min:8|required',
-            'nom' => 'requited',
-            'prenom' => 'requited',
-            'login' => 'requited'
+            'login' => 'unique:users,login'
         ],
         [
             'mdp.min' => 'Password must be longer than 8 characters',
-            'nom.requited' => 'Please enter nom',
-            'prenom.requited' => 'Please enter prenom',
-            'login.requited' => 'Please enter login'
+            'login.unique' => 'User name already exists.',
         ]
         );
         $nom = $request['nom'];
@@ -84,15 +84,16 @@ class BaseController extends Controller
         $mdp = $request['mdp'];
 
         $mdp = Hash::make($mdp);
-        
+
         DB::table('users')
             ->insert([
                 'nom' => $nom,
                 'prenom' => $prenom,
                 'login' => $login,
-                'mdp' => $mdp
+                'mdp' => $mdp,
+                'formation_id' => 1
             ]);
-        return view('login.login');
+        return redirect()->route('login');
     }
 
 }

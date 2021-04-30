@@ -30,6 +30,7 @@ class ManageController extends Controller
         $data['student'] = $student;
         return view('manage.account.listStudent', $data);
     }
+
     public function getListTeacher() {
         $data =[];
         $teacher = DB::table('users')
@@ -40,16 +41,17 @@ class ManageController extends Controller
         $data['teacher'] = $teacher;
         return view('manage.account.listTeacher', $data);
     }
+
     public function postdeleteAccount($id){
         $user_id = User::find($id);
         $user_id = $user_id->id;
-        $cour_user = DB::table('cours_users')
+        DB::table('cours_users')
             ->where('user_id','=',$user_id)
             ->delete();
-        $cour = DB::table('cours')
+        DB::table('cours')
             ->where('user_id',$user_id)
             ->delete();
-        $user = DB::table('users')
+        DB::table('users')
             ->where('id',$user_id)
             ->delete();
 
@@ -59,7 +61,7 @@ class ManageController extends Controller
     public function register() {
 
         $formations = DB::table('formations')
-        ->where('id', '>', 0)
+        ->where('id', '>', 1)
         ->where('deleted_at', '=', 0)
         ->get();
         return view('manage.register.register', ['formations' => $formations]);
@@ -79,7 +81,7 @@ class ManageController extends Controller
         ]
         );
 
-        $formation_id = $request->formation_id ? $request->formation_id : 0;
+        $formation_id = $request->formation_id ? $request->formation_id : 1;
 
         $user = new User();
 

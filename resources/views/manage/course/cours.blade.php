@@ -81,6 +81,4 @@
                 @endif
             </tbody>
         </table>
-
-
 @endsection
