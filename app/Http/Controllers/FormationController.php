@@ -15,7 +15,8 @@ class FormationController extends Controller
     public function index()
     {
         //
-        return view('manage.formation.index');
+        $coures = DB::table('formations')->where('deleted_at', '=', 0)->get();
+        return view('manage.course.course',['coures' => $coures]);
     }
 
     /**
@@ -26,7 +27,8 @@ class FormationController extends Controller
     public function create()
     {
         //
-        return view('manage.formation.create');
+        $coures = DB::table('formations')->get();
+        return view('manage.course.course', ['coures' => $coures]);
     }
 
     /**
@@ -38,6 +40,12 @@ class FormationController extends Controller
     public function store(Request $request)
     {
         //
+        DB::table('formations')->insert([
+            'intitule' => $request->intitule,
+            'deleted_at' => 0
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -49,6 +57,7 @@ class FormationController extends Controller
     public function show($id)
     {
         //
+        $formation = DB::table('formations')->where('id', '=', $id)->first();
     }
 
     /**
@@ -87,5 +96,10 @@ class FormationController extends Controller
     public function destroy($id)
     {
         //
+        DB::table('formations')
+        ->where('id', '=', $id)
+        ->update(['deleted_at' => 1]);
+
+        return redirect()->back();
     }
 }
