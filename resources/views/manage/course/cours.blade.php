@@ -10,6 +10,12 @@
         @endif
         <div class="d-block mb-4 mb-md-0">
             <h2 class="h4">Courses List</h2>
+                <form action="{{route('manager.search.course')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
+                    <div class="input-group input-group-merge search-bar">
+                        <input type="text" class="form-control" id="topbarInputIconLeft" name="search" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="submit" class="btn btn-success form-control" value="Search" style="width:70px;">
+                    </div>
+                </form>
         </div>
 
 

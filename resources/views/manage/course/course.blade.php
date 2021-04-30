@@ -5,6 +5,12 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4" style="padding-bottom: 5px !important;">
         <div class="d-block mb-4 mb-md-0">
             <h2 class="h4">Formations List</h2>
+                <form action="{{route('manager.search.formation')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
+                    <div class="input-group input-group-merge search-bar">
+                        <input type="text" class="form-control" name="search" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="submit" class="btn btn-success form-control" value="Search" style="width:70px;">
+                    </div>
+                </form>
         </div>
     </div>
 

@@ -23,7 +23,7 @@ class ManageController extends Controller
     public function getListStudent() {
         $data =[];
         $student = DB::table('users')
-            ->where('users.type', 'etudiant')
+            ->where('users.type', '=', 'etudiant')
             ->join('formations','users.formation_id','=','formations.id')
             ->select('users.*','formations.intitule')
             ->get();
@@ -34,7 +34,7 @@ class ManageController extends Controller
     public function getListTeacher() {
         $data =[];
         $teacher = DB::table('users')
-            ->where('users.type', 'enseignant')
+            ->where('users.type', '=', 'enseignant')
             ->join('formations','users.formation_id','=','formations.id')
             ->select('users.*','formations.intitule')
             ->get();
@@ -150,4 +150,69 @@ class ManageController extends Controller
 
         return redirect()->back();
     }
+
+    public function searchCourse() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $list = DB::table('cours')
+                        ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
+                        ->join('plannings','cours.id','=','plannings.cours_id')
+                        ->join('formations','cours.formation_id','=','formations.id')
+                        ->where('cours.intitule', 'like', '%'.$text.'%')
+                        ->get();
+            return view('manage.course.cours',[
+                'cours'=> $list
+            ]);
+        }
+        return redirect()->back();
+    }
+
+    public function searchFormation() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $coures = DB::table('formations')
+            ->where('deleted_at', '=', 0)
+            ->where('intitule', 'like', '%'.$text.'%')
+            ->paginate(15);
+        return view('manage.course.course',['coures' => $coures]);
+        }
+        return redirect()->back();
+    }
+
+    public function searchStudent() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $student = DB::table('users')
+            ->where('users.type', 'etudiant')
+            ->where('users.nom', 'like', '%'.$text.'%')
+            ->orWhere('users.prenom', 'like', '%'.$text.'%')
+            ->join('formations','users.formation_id','=','formations.id')
+            ->select('users.*','formations.intitule')
+            ->get();
+            $data['student'] = $student;
+            return view('manage.account.listStudent', $data);
+        }
+        return redirect()->back();
+    }
+
+    public function searchTeacher() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $teacher = DB::table('users')
+            ->where('users.type', '=', 'enseignant')
+            ->where('users.nom', 'like', '%'.$text.'%')
+            ->orWhere('users.prenom', 'like', '%'.$text.'%')
+            ->join('formations','users.formation_id','=','formations.id')
+            ->select('users.*','formations.intitule')
+            ->get();
+            $data['teacher'] = $teacher;
+            return view('manage.account.listTeacher', $data);
+        }
+        return redirect()->back();
+    }
+
 }

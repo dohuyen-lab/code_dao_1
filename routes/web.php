@@ -17,7 +17,7 @@ use App\Http\Controllers\CourController;
 */
 
 Route::get('/', function () {
-    return view('login.login');
+    return view('manage.listStudent');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -53,6 +53,12 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/student', [ManageController::class, 'getListStudent'])->name('manager.student');
     // delete user
     Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
+
+    // search
+    Route::get('/search/formation', [ManageController::class, 'searchFormation'])->name('manager.search.formation');
+    Route::get('/search/course', [ManageController::class, 'searchCourse'])->name('manager.search.course');
+    Route::get('/search/student', [ManageController::class, 'searchStudent'])->name('manager.search.student');
+    Route::get('/search/teacher', [ManageController::class, 'searchTeacher'])->name('manager.search.teacher');
 });
 
 
@@ -72,6 +78,7 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
     Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
+    Route::get('/cours', [CourController::class, 'getAllWeek'])->name('getListCoursWeek');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
     Route::get('/cours/store', [CourController::class, 'getStore'])->name('storeCours');
     Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
