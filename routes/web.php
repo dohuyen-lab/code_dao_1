@@ -5,6 +5,7 @@ use App\Http\Controllers\ManageController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CourController;
+use App\Http\Controllers\InformationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +47,7 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/teacher', [ManageController::class, 'getListTeacher'])->name('manager.teacher');
     //student
     Route::get('/student', [ManageController::class, 'getListStudent'])->name('manager.student');
+    Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
 });
 
 
@@ -56,7 +58,8 @@ Route::group(['prefix'=>'student'], function () { //, 'middleware'=>'auth'
     Route::get('/cours', [StudentController::class, 'getListCoursStudent'])->name('getListCoursStudent');
     Route::post('/registercours', [StudentController::class, 'postRegisterCours'])->name('postRegisterCours');
     Route::post('/delete/{id}', [StudentController::class, 'postdeleteCours'])->name('postdeleteCours');
-
+    Route::get('/information', [InformationController::class, 'getInformation'])->name('getInformation');
+    Route::get('/editinformation', [InformationController::class, 'editInformation'])->name('editInformation');
 });
 //teacher
 
