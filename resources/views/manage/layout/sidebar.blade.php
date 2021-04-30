@@ -20,15 +20,15 @@
             <li class="nav-item">
           <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-app">
             <span>
-              User Management
+               Gestion des utilisateurs
             </span>
             <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
           </span>
                 <div class="multi-level collapse " role="list" id="submenu-app" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link" href="{{route('manager.student')}}"><span>Students</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href="{{route('manager.teacher')}}"><span>Teachers</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href="{{route('manager.register')}}"><span>Create user account</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.student')}}"><span>Etudiants</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.teacher')}}"><span>Enseignants</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.register')}}"><span> Créer d’utilisateur</span></a></li>
                     </ul>
                 </div>
             </li>
@@ -36,21 +36,21 @@
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
                 <a href="{{route('formations.index')}}" class="nav-link">
                     <span>
-                        Formation Management
+                        Gestion des formation
                     </span>
                 </a>
             </li>
             <li class="nav-item ">
                 <a href="{{ route('manager.cours')}}" class="nav-link">
                     <span>
-                        Courses Management
+                        Gestion des cours
                     </span>
                 </a>
             </li>
 
             <li class="nav-item ">
                 <a href="{{route('manager.request')}}" class="nav-link">
-                    <span>Request</span>
+                    <span>Demande</span>
                 </a>
             </li>
         </ul>

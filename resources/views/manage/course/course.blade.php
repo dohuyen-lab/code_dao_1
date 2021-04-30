@@ -4,16 +4,14 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4" style="padding-bottom: 5px !important;">
         <div class="d-block mb-4 mb-md-0">
-            <h2 class="h4">Formations List</h2>
-            <div class="d-block mb-4 mb-md-0">
-                <h2 class="h4">Student List</h2>
-                <form class="navbar-search form-inline" id="navbar-search-main">
+
+            <h2 class="h4">Liste des formations</h2>
+                <form action="{{route('manager.search.formation')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
                     <div class="input-group input-group-merge search-bar">
-                        <span class="input-group-text" id="topbar-addon"><span class="fas fa-search"></span></span>
-                        <input type="text" class="form-control w-75" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="text" class="form-control" name="search" id="topbarInputIconLeft" placeholder="Recherche" aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="submit" class="btn btn-success form-control" value="Search" style="width:70px;">
                     </div>
                 </form>
-            </div>
         </div>
     </div>
 
@@ -25,10 +23,10 @@
                     @csrf
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="col mt-4 align-self-center">
-                                <input type="text" class="form-control" name="intitule" placeholder="Name Course" required>
+                                <input type="text" class="form-control" name="intitule" placeholder="Matière" required>
                             </div>
                             <div class="col mt-4">
-                                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                                <button class="btn btn-outline-secondary" type="submit">Soumission</button>
                         </div>
                     </div>
                 </form>
@@ -64,7 +62,7 @@
                                         <input type="hidden" name="_method" value="delete" />
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <button class="btn btn-danger" type="submit">
-                                            Delete
+                                            Supprimer
                                         </button>
                                     </form>
                                 </td>
@@ -73,7 +71,7 @@
                     @endif
                 </tbody>
             </table>
-
+            {{$coures->links()}}
         </div>
 
 
