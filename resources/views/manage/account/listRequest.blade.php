@@ -26,8 +26,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                @if(!empty($r))
-                @foreach($r as $key => $s)
+                @if(!empty($requests))
+                @foreach($requests as $key => $s)
                     <form action="{{url('/manager/accept/')}}" method="POST" >
                         @csrf
                         <input name="user_id" id="user_id" value="{{$s->id}}" hidden>
