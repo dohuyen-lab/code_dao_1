@@ -46,16 +46,15 @@ class InformationController extends Controller
         $user->update();
         return($request);
     }
+
     public function postChangePass(Request $request)
     {
-
-        //upload
-        $request_data = $request->All();
         $id = $request->idUser;
-        $user = User::find($id);
+        $user = DB::table('users')->where('id', '=', $id)->first();
+
         if($request->password){
             $validatedData = $request->validate([
-                'newpassword' => 'confirmed|min:8',
+                'newpassword' => 'min:8',
                 'password_confirmation'=>'required|same:newpassword',
 
             ],[
@@ -63,15 +62,21 @@ class InformationController extends Controller
                 'password.min'=>'Mật khẩu phải lớn hơn 8 kí tự',
             ]);
         }
-        if(Hash::check($request_data['current-password'], $user->mdp)) {
-            $user->mdp = Hash::make($request->password);
-            $user->update();
+
+
+        if ($request->newpassword != $request->password_confirmation) {
+            return redirect()->back()->with(['message'=>'Le mot de passe ne correspond pas']);
         }
-        else
+
+        if (Hash::check($request->password, $user->mdp)) {
+            DB::table('users')
+            ->where('id', '=', $id)
+            ->update(['mdp' => Hash::make($request->newpassword)]);
+        } else
         {
             $error = array('password' => 'Please enter correct current password');
             return response()->json(array('error' => $error), 400);
         }
-        return($request);
+        return redirect()->back();
     }
 }

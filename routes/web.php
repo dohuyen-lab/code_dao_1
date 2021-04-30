@@ -18,7 +18,7 @@ use App\Http\Controllers\InformationController;
 */
 
 Route::get('/', function () {
-    return view('manage.listStudent');
+    return view('login.login');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
