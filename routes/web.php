@@ -25,8 +25,8 @@ Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
 Route::get('/logout', 'BaseController@logout')->name('logout');
 
-Route::get('/signup', 'BaseController@getSignup')->name('signup');
-Route::post('/signup', 'BaseController@signup')->name('post.signup');
+Route::get('/inscription', 'BaseController@getSignup')->name('signup');
+Route::post('/inscription', 'BaseController@signup')->name('post.signup');
 
  //manage
 Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
