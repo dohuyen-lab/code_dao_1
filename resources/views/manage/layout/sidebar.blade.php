@@ -26,16 +26,25 @@
           </span>
                 <div class="multi-level collapse " role="list" id="submenu-app" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link" href="{{route('getListStudent')}}"><span>Students</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href="{{route('getListTeacher')}}"><span>Teachers</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.student')}}"><span>Students</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.teacher')}}"><span>Teachers</span></a></li>
                         <li class="nav-item "><a class="nav-link" href="{{route('manager.register')}}"><span>Create user account</span></a></li>
                     </ul>
                 </div>
             </li>
-
-            <li class="nav-item  active ">
-                <a href="{{route('getTeacherCalendar')}}" class="nav-link">
-                    <span>Course Management</span>
+            <li class="nav-item">
+                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
+                <a href="{{route('formations.index')}}" class="nav-link">
+                    <span>
+                        Formation Management
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a href="{{ route('manager.cours')}}" class="nav-link">
+                    <span>
+                        Courses Management
+                    </span>
                 </a>
             </li>
         </ul>

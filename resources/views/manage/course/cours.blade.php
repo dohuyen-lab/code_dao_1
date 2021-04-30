@@ -6,6 +6,9 @@
         <div class="d-block mb-4 mb-md-0">
             <h2 class="h4">Courses List</h2>
         </div>
+
+
+
     </div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
@@ -15,7 +18,7 @@
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                     Create course
                </button>
-               <form method="POST" action="{{route('storeCours')}}">
+               <form method="POST" action="{{route('manager.post.course')}}">
                 @csrf
                 <input type="hidden" name="course_id" value="">
                     <div class="modal" id="myModal">
@@ -130,13 +133,21 @@
                             <td>{{$c->date_debut}}</td>
                             <td>{{$c->date_fin}}</td>
                             <td>
-                                <form method="POST" action="{{route('deleteCours')}}">
-                                    {{ csrf_field() }}
-                                    <div class="form-group">
-                                        <input type="text" value="{{$c->id}}" name="id" hidden>
-                                        <input type="submit" class="btn btn-danger" value="deltete" >
-                                    </div>
-                                </form>
+                                <div class="d-flex">
+                                    <form method="GET" action="{{url('/manager/cours/'.$c->id)}}">
+                                        <div class="form-group">
+                                            <input type="text" value="{{$c->id}}" name="id" hidden>
+                                            <input type="submit" class="btn btn-success" value="edit" >
+                                        </div>
+                                    </form>&nbsp;&nbsp;
+                                    <form method="POST" action="{{route('manager.delete.course')}}">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input type="text" value="{{$c->id}}" name="id" hidden>
+                                            <input type="submit" class="btn btn-danger" value="deltete" >
+                                        </div>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

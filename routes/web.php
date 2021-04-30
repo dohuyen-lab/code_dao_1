@@ -17,12 +17,7 @@ use App\Http\Controllers\CourController;
 */
 
 Route::get('/', function () {
-
-
-    // return view('manage.course.course');
-
-    return view('manage.register.register');
-
+    return view('login.login');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
@@ -34,15 +29,22 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/register', [ManageController::class, 'register'])->name('manager.register');
     Route::post('/register', [ManageController::class, 'postRegister'])->name('manager.post_register');
 
-    //formations
-    Route::resource('formations', 'FormationController');
+    //formations -> khoá học.
+    Route::resource('formations', 'FormationController')->except([
+        'create', 'show', 'edit', 'update'
+    ]);
+    //cours -> lớp học
+    Route::get('cours', [CourController::class, 'getAll'])->name('manager.cours');
+    Route::post('/cours/store', [ManageController::class, 'postCourse'])->name('manager.post.course');
+    Route::get('/cours/{id}', [CourController::class, 'getCourseByID'])->name('manager.edit.course');
+    Route::post('/cours/{id}', [CourController::class, 'updateCourseByID'])->name('manager.update.course');
+    Route::post('/cours/delete', [CourController::class, 'delete'])->name('manager.delete.course');
     // teacher
-    Route::get('/listStudent', [ManageController::class, 'getListStudent'])->name('getListStudent');
-    Route::get('/listTeacher', [ManageController::class, 'getListTeacher'])->name('getListTeacher');
-    Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
-
+    Route::get('/teacher', [ManageController::class, 'getListTeacher'])->name('manager.teacher');
     //student
+    Route::get('/student', [ManageController::class, 'getListStudent'])->name('manager.student');
 });
+
 
 
 //student
@@ -55,10 +57,8 @@ Route::group(['prefix'=>'student'], function () { //, 'middleware'=>'auth'
 });
 //teacher
 
-// Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
 
-
-Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
+Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
     Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
