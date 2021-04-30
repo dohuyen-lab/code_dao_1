@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login</title>
+    <title>Inscription</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -42,7 +42,7 @@
                     <div class="fdb-box">
                         <div class="row">
                             <div class="col">
-                                <h1>S’inscrire</h1>
+                                <h1>Inscription</h1>
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -78,7 +78,7 @@
                         </div>
                         <div class="mt-4">
                             <div class="col">
-                                <a href="{{route('login')}}" >Login</a>
+                                <a href="{{route('login')}}" >S'identifier</a>
                             </div>
                             <div class="col d-block">
                                 <button class="btn btn-outline-secondary" type="submit">Soumission</button>
