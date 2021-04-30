@@ -214,5 +214,4 @@ class ManageController extends Controller
         }
         return redirect()->back();
     }
-
 }
