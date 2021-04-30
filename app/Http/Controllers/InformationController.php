@@ -55,15 +55,20 @@ class InformationController extends Controller
         $user = User::find($id);
         if($request->password){
             $validatedData = $request->validate([
-                'newpassword' => 'confirmed|min:8',
-                'password_confirmation'=>'required|same:newpassword',
+                'newpassword' => 'required|min:8',
+                'password_confirmation'=>'required',
 
             ],[
-                'newpassword.confirmed'=>'Mật khẩu không trùng khớp',
+                'newpassword.required'=>'Mật khẩu không trùng khớp',
                 'password.min'=>'Mật khẩu phải lớn hơn 8 kí tự',
             ]);
         }
-        if(Hash::check($request_data['current-password'], $user->mdp)) {
+        if ($request->password != $request->password_confirmation)
+        {
+            return redirect()->back()->with(['message'=> 'mật khẩu không khớp']);
+        }
+        if(Hash::check($request_data['password'], $user->mdp)) {
+            dd('aaaa');
             $user->mdp = Hash::make($request->password);
             $user->update();
         }

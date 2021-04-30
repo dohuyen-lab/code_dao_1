@@ -115,7 +115,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Chỉnh sửa thông tin người dùng</h4>
+                    <h4 class="modal-title">Đổi password</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
@@ -216,7 +216,7 @@
                 console.log(data);
                 $('#editPassword').modal('hide');
                 toastr.success('Sửa thành công!')
-                window.location.reload().delay(500);
+                // window.location.reload().delay(500);
 
             },
             error: function(error) {
