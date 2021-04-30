@@ -7,8 +7,8 @@
             <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                    <li class="breadcrumb-item"><a href="#">Tài khoản</a></li>
-                    <li class="breadcrumb-item"><a href="#">Thông tin tài khoản</a></li>
+                    <li class="breadcrumb-item"><a href="#">Compte</a></li>
+                    <li class="breadcrumb-item"><a href="#">Information du compte</a></li>
                 </ol>
             </nav>
         </div>
@@ -26,8 +26,8 @@
                                     <p class="text-secondary mb-1">
                                     </p>
                                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Chỉnh sửa thông tin</button> -->
-                                    <button onclick="editInformation({{$formation->id}})" class="btn btn-primary">Chỉnh sửa thông tin</button>
-                                    <button onclick="ChangePass()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Đổi mật khẩu</button>
+                                    <button onclick="editInformation({{$formation->id}})" class="btn btn-primary btn-sm btn-block">Modifier le profil</button>
+                                    <button onclick="ChangePass()" type="button" class="btn btn-primary btn-sm btn-block" data-toggle="modal " data-target="#myModal">Changer mot de passe</button>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">First Name</h6>
+                                    <h6 class="mb-0">Prénom </h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {{$formation->nom}}
@@ -48,7 +48,7 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Last Name </h6>
+                                    <h6 class="mb-0">Nom </h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {{$formation->prenom}}
@@ -77,7 +77,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Chỉnh sửa thông tin người dùng</h4>
+                    <h4 class="modal-title">Modifier le profil</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
@@ -86,12 +86,12 @@
                         @csrf
                         <input hidden name="idUser" id="idUser" type="text">
                         <div class="form-group">
-                            <label>First Name</label>
+                            <label>Prénom</label>
                             <input type="text" name="nom" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group">
-                            <label>Last Name</label>
+                            <label>Nom</label>
                             <input type="text" name="prenom" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
@@ -100,8 +100,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button onclick="submitEdit()" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Cập nhật</button>
-                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button onclick="submitEdit()" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Mettre à jour</button>
+                    <button class="btn btn-danger" data-dismiss="modal">Fermer</button>
                 </div>
 
             </div>
@@ -115,7 +115,10 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Chỉnh sửa thông tin người dùng</h4>
+
+
+                    <h4 class="modal-title">Changer mot de passe</h4>
+
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
@@ -129,17 +132,17 @@
                         @endif
                         <input hidden name="idUser" id="idUser" value="{{$formation->id}}" type="text">
                         <div class="form-group">
-                            <label>current password</label>
+                            <label>Mot de passe actuel</label>
                             <input type="password" name="password" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group">
-                            <label>New password</label>
+                            <label>Nouveau mot de passe</label>
                             <input type="password" name="newpassword" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group">
-                            <label>Comfirm password</label>
+                            <label>Confirmez le mot de passe</label>
                             <input type="password" name="password_confirmation" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
@@ -220,7 +223,7 @@
                 console.log(data);
                 $('#editPassword').modal('hide');
                 toastr.success('Sửa thành công!')
-                window.location.reload().delay(500);
+                // window.location.reload().delay(500);
 
             },
             error: function(error) {
