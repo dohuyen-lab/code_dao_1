@@ -26,6 +26,11 @@
                             </button>
                         </div>
                     @endif
+                    @if (Session::has('message'))
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <strong>{{ Session::get('message') }}</strong>
+                    </div>
+                    @endif
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <ul>

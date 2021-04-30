@@ -15,7 +15,9 @@ class FormationController extends Controller
     public function index()
     {
         //
-        $coures = DB::table('formations')->where('deleted_at', '=', 0)->get();
+        $coures = DB::table('formations')
+        ->where('deleted_at', '=', 0)
+        ->paginate(15);
         return view('manage.course.course',['coures' => $coures]);
     }
 
