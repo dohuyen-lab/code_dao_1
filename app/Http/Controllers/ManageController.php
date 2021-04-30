@@ -92,4 +92,15 @@ class ManageController extends Controller
 
         return redirect()->back();
     }
+
+    public function getRequest(Request $request){
+        $r = DB::table('users')
+                ->join('formations', 'users.formation_id','=','formation.id')
+                ->where('type', '=', null)
+                ->get();
+        
+        return view('',[
+            'requests' => $r
+        ]);
+    }
 }
