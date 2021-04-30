@@ -23,19 +23,19 @@
                                     <div class="col mt-4">
                                         @if($status == 0)
                                             <input type="text" class="form-control" placeholder="Name class" name="intitule" id="intitule">
-                                        @else 
+                                        @else
                                             <label>{{$cour->intitule}}</label>
                                     </div>
                                 </div>
                                 <div class="row align-items-center">
                                             <div class="col mt-4">
-                                                
+
                                                     <select name="user_id" id="user_id" class="form-control" required="required">
                                                          @foreach($teachers as $key => $t)
                                                             <option value="{{ $t->id }}">{{ $t->nom + $t->prenom }}</option>
-                                                        @endfor 
+                                                        @endforeach
                                                     </select>
-                                                    
+
                                             </div>
                                         </div>
                                             <div class="row align-items-center">
@@ -44,7 +44,7 @@
                                                     <select name="formation_id" id="formation_id" class="form-control" required="required">
                                                          @foreach($fomations as $key => $f)
                                                             <option value="{{ $f->id }}">{{ $f->intitule }}</option>
-                                                        @endfor 
+                                                        @endforeach
                                                     </select>
 
                                                 </div>
@@ -56,7 +56,7 @@
                                                 <input class="form-control" type="date" value="{{$cour->date_debut}}" id="date_debut" name="date_debut">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group row">
                                                 <label for="example-date-input" class="col mt-4 col-form-label">End time</label>
                                                 <div class="col mt-4">
@@ -74,8 +74,7 @@
                                 </div>
                             </section>
                         </div>
-                        
-             </form>
+            </form>
         </div>
     </section>
 @endsection

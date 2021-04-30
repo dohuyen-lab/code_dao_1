@@ -24,9 +24,9 @@
                         </div>
                         <div class="row align-items-center">
                             <div style="display: flex; margin-left: 170px; margin-top: 30px">
-                                <input type="radio" id="teacher" name="type" value="enseignant">
+                                <input type="radio" id="teacher" name="type" value="enseignant" onclick="checktype('teacher')">
                                 <label for="teacher" style="margin-left: 10px">teacher</label><br>
-                                <input type="radio" id="student" name="type" value="etudiant" style="margin-left: 30px">
+                                <input type="radio" id="student" name="type" value="etudiant" style="margin-left: 30px" onclick="checktype()">
                                 <label for="student" style="margin-left: 10px" >student</label><br>
                             </div>
                             <div class="col mt-4">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="col mt-4">
-                                <select class="form-control" name="formation_id">
+                                <select class="form-control" name="formation_id" id="formation_select">
                                     <option selected>Click this select menu</option>
                                     @if (!empty($formations))
                                         @foreach ($formations as $format)
@@ -73,4 +73,13 @@
             </form>
         </div>
     </section>
+    <script >
+        function checktype(type) {
+            if (type) {
+                $('#formation_select').prop('disabled', true);
+            } else {
+                $('#formation_select').prop('disabled', false);
+            }
+        }
+    </script>
 @endsection

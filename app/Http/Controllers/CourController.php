@@ -19,7 +19,7 @@ class CourController extends Controller
                     ->get();
         $formation = DB::table('formations')
                         ->get();
-        
+
         if($user->type == "admin"){
             $user = DB::table('users')
                         ->where('type', 'enseignant')
@@ -99,8 +99,8 @@ class CourController extends Controller
         ]);
     }
 
-    public function getCourse(Request $request) {
-        $cour_id = $request['id'];
+    public function getCourse(Request $request, $id) {
+        $cour_id = $request['id'] | $id;
 
         $cour_edit = DB::table('cours')
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin')
@@ -109,7 +109,7 @@ class CourController extends Controller
                         ->get();
         $teacher = DB::table('cours')
                         ->select('users.nom','users.prenom','users.id')
-                        ->join('users','users.id','=','cours.users_id')
+                        ->join('users','users.id','=','cours.user_id')
                         ->where('cours.id', '=', $cour_id)
                         ->get();
         $formation = DB::table('cours')
@@ -143,12 +143,12 @@ class CourController extends Controller
 
         DB::table('plannings')
         ->where('cours_id', '=', $id)
-        ->insert([
+        ->update([
             'date_debut' => $date_debut,
             'date_fin' => $date_fin
         ]);
 
-        return $this->getAll();
+        return redirect()->back();
     }
 
     public function delete(Request $request){

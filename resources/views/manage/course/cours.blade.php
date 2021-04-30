@@ -59,9 +59,8 @@
                             <td>{{$c->date_fin}}</td>
                             <td>
                                 <div class="d-flex">
-                                    <form method="GET" action="{{url('/manager/cours/'.$c->id)}}">
+                                    <form method="GET" action="{{url('/manager/cours/edit/'.$c->id)}}">
                                         <div class="form-group">
-                                            <input type="text" value="{{$c->id}}" name="id" hidden>
                                             <input type="submit" class="btn btn-success" value="edit" >
                                         </div>
                                     </form>&nbsp;&nbsp;
