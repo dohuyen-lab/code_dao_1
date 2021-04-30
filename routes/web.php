@@ -17,7 +17,7 @@ use App\Http\Controllers\CourController;
 */
 
 Route::get('/', function () {
-    return view('login.login');
+    return view('manage.listStudent');
 });
 
 Route::get('/login', 'BaseController@login')->name('login');
