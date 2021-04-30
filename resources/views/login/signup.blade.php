@@ -69,8 +69,9 @@
                             <div class="col">
 
                                 <select name="formation" id="formation" class="form-control" required="required">
-                                @foreach($formations as $key => $f)
-                                    <option value="{{$f->id}}">{{$f->intitule}}</option>
+                                    <option value="" selected>None</option>
+                                    @foreach($formations as $key => $f)
+                                        <option value="{{$f->id}}">{{$f->intitule}}</option>
                                     @endforeach
                                 </select>
 
