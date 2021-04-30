@@ -9,13 +9,12 @@
             </div>
         @endif
         <div class="d-block mb-4 mb-md-0">
-            <h2 class="h4">Courses List</h2>
+            <h2 class="h4">Liste de cours</h2>
             <div class="d-block mb-4 mb-md-0">
-                <h2 class="h4">Student List</h2>
                 <form class="navbar-search form-inline" id="navbar-search-main">
                     <div class="input-group input-group-merge search-bar">
                         <span class="input-group-text" id="topbar-addon"><span class="fas fa-search"></span></span>
-                        <input type="text" class="form-control w-75" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="text" class="form-control w-75" id="topbarInputIconLeft" placeholder="Recherche" aria-label="Search" aria-describedby="topbar-addon">
                     </div>
                 </form>
             </div>
@@ -29,7 +28,7 @@
             <div class="d-block mb-4 mb-md-0">
                 <a href="{{route('manager.store.cours')}}">
                     <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                        Create course
+                        Création de cours
                     </button>
                 </a>
         </div>
@@ -51,10 +50,10 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Serial</th>
-                <th>Intitule</th>
+                <th>N°</th>
+                <th>Intitulé</th>
                 <th>Formation</th>
-                <th>Date Debut</th>
+                <th>Date Début</th>
                 <th>Date Fin</th>
                 <th>Action</th>
             </tr>
@@ -73,14 +72,14 @@
                                 <div class="d-flex">
                                     <a href="{{url('/manager/cours/edit/'.$c->id)}}">
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-success" value="edit" >
+                                            <input type="submit" class="btn btn-success" value="Éditer" >
                                         </div>
                                     </a>&nbsp;&nbsp;
                                     <form method="POST" action="{{route('manager.delete.course')}}">
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <input type="text" value="{{$c->id}}" name="id" hidden>
-                                            <input type="submit" class="btn btn-danger" value="deltete" >
+                                            <input type="submit" class="btn btn-danger" value="supprimer" >
                                         </div>
                                     </form>
                                 </div>

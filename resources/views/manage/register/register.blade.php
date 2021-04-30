@@ -19,23 +19,23 @@
                         @endif
                         <div class="row">
                             <div class="col text-center">
-                                <h1>Register</h1>
+                                <h1>Créer d’utilisateur</h1>
                             </div>
                         </div>
                         <div class="row align-items-center">
                             <div style="display: flex; margin-left: 170px; margin-top: 30px">
                                 <input type="radio" id="teacher" name="type" value="enseignant" onclick="checktype('teacher')">
-                                <label for="teacher" style="margin-left: 10px">teacher</label><br>
+                                <label for="teacher" style="margin-left: 10px">Enseignant</label><br>
                                 <input type="radio" id="student" name="type" value="etudiant" style="margin-left: 30px" onclick="checktype()">
-                                <label for="student" style="margin-left: 10px" >student</label><br>
+                                <label for="student" style="margin-left: 10px" >Etudiant</label><br>
                             </div>
                             <div class="col mt-4">
-                                <input type="text" class="form-control" name="firstname" placeholder="First Name" required>
+                                <input type="text" class="form-control" name="firstname" placeholder="Prénom" required>
                             </div>
                         </div>
                         <div class="row align-items-center">
                             <div class="col mt-4">
-                                <input type="text" class="form-control" name="lastname" placeholder="Last Name" required>
+                                <input type="text" class="form-control" name="lastname" placeholder="Nom" required>
                             </div>
                         </div>
                         <div class="row align-items-center">
@@ -46,7 +46,7 @@
                         <div class="row align-items-center">
                             <div class="col mt-4">
                                 <select class="form-control" name="formation_id" id="formation_select">
-                                    <option selected>Click this select menu</option>
+                                    <option selected>Choisir la formation</option>
                                     @if (!empty($formations))
                                         @foreach ($formations as $format)
                                             <option value="{{ $format->id}}">{{ $format->intitule }}</option>
@@ -57,15 +57,15 @@
                         </div>
                         <div class="row align-items-center mt-4">
                             <div class="col">
-                                <input type="password" class="form-control" placeholder="Password" name="password" required>
+                                <input type="password" class="form-control" placeholder="Mot de passe" name="password" required>
                             </div>
                             <div class="col">
-                                <input type="password" class="form-control" placeholder="Confirm Password" name="password_confirmation" required>
+                                <input type="password" class="form-control" placeholder="Confirmer mot de passe" name="password_confirmation" required>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <button class="btn btn-primary mt-4" type="submit">Submit</button>
+                                <button class="btn btn-primary mt-4" type="submit">Créer votre compte</button>
                             </div>
                         </div>
                     </div>

@@ -42,32 +42,32 @@
                     <div class="fdb-box">
                         <div class="row">
                             <div class="col">
-                                <h1>Sign up</h1>
+                                <h1>S’inscrire</h1>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <input type="text" class="form-control" name="nom" placeholder="Firts name" required>
+                                <input type="text" class="form-control" name="nom" placeholder="Prénom" required>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <input type="text" class="form-control" name="prenom" placeholder="Last name" required>
+                                <input type="text" class="form-control" name="prenom" placeholder="Nom" required>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <input type="text" class="form-control" name="login" placeholder="Username" required>
+                                <input type="text" class="form-control" name="login" placeholder="Identifiant" required>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <input type="password" class="form-control mb-1" name="mdp" placeholder="Password" required>
+                                <input type="password" class="form-control mb-1" name="mdp" placeholder="Mot de passe" required>
                             </div>
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                                <button class="btn btn-outline-secondary" type="submit">Soumission</button>
                             </div>
                         </div>
                     </div>

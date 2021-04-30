@@ -4,13 +4,7 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
-                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                    <li class="breadcrumb-item"><a href="#"><span class="fas fa-home"></span></a></li>
-                    <li class="breadcrumb-item"><a href="#">Calendar</a></li>
-                </ol>
-            </nav>
-            <h2 class="h4">Register the course</h2>
+            <h2 class="h4">Inscription</h2>
         </div>
     </div>
     <div class="table-settings mb-4">
@@ -21,12 +15,12 @@
                     <div class="row align-items-center" style="display: flex">
                         <div >
                             <div class="col mt-4" >
-                                <input type="text" class="form-control" name="intitule" placeholder="Name Cours" required>
+                                <input type="text" class="form-control" name="intitule" placeholder="Nom de cours" required>
                             </div>
                         </div>
                         <div>
                             <div class="col mt-4">
-                                <button type="submit"> Register </button>
+                                <button type="submit">S’inscrire</button>
                             </div>
                         </div>
                     </div>
@@ -36,11 +30,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>Course Title</th>
-                    <th>Date start</th>
-                    <th>Date end</th>
-                    <th>Status</th>
+                    <th> N°</th>
+                    <th>Enseignement</th>
+                    <th>Date_début</th>
+                    <th>Date_fin</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -53,7 +47,7 @@
                         <td>{{$c->date_debut}}</td>
                         <td>{{$c->date_fin}}</td>
                         <td>
-                            <button type="submit">Delete</button>
+                            <button type="submit">Supprimer</button>
                         </td>
                     </tr>
                     </form>
