@@ -23,6 +23,12 @@ Route::get('/', function () {
 Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
 Route::get('/logout', 'BaseController@logout')->name('logout');
+
+Route::get('/signup', function(){
+                return view('login.signup');
+            })->name('signup');
+Route::post('/signup', 'BaseController@signup')->name('signup');
+
  //manage
 Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
     Route::get('/', [ManageController::class, 'index'])->name('manager.index');

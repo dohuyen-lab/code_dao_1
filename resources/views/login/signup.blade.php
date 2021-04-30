@@ -41,29 +41,34 @@
                     @endif
                     <div class="fdb-box">
                         <div class="row">
-                        <div class="col">
-                            <h1>Log In</h1>
-                        </div>
-                        </div>
-                        <div class="row mt-4">
-                        <div class="col">
-                            <input type="text" class="form-control" name="login" placeholder="Username" required>
-                        </div>
+                            <div class="col">
+                                <h1>Sign up</h1>
+                            </div>
                         </div>
                         <div class="row mt-4">
-                        <div class="col">
-                            <input type="password" class="form-control mb-1" name="mdp" placeholder="Password" required>
-                        </div>
-                        </div>
-                        <div class="row mt-4">
-                        <div class="col">
-                            <a href="{{route('signup')}}">Sign up</a>
-                        </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="nom" placeholder="Firts name" required>
+                            </div>
                         </div>
                         <div class="row mt-4">
-                        <div class="col">
-                            <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                            <div class="col">
+                                <input type="text" class="form-control" name="prenom" placeholder="Last name" required>
+                            </div>
                         </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <input type="text" class="form-control" name="login" placeholder="Username" required>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <input type="password" class="form-control mb-1" name="mdp" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                            </div>
                         </div>
                     </div>
                 </form>
