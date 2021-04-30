@@ -34,11 +34,14 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
         'create', 'show', 'edit', 'update'
     ]);
     //cours -> lớp học
-
+    Route::get('cours', [CourController::class, 'getAll'])->name('manager.cours');
+    Route::post('/cours/store', [ManageController::class, 'postCourse'])->name('manager.post.course');
+    Route::get('/cours/{id}', [CourController::class, 'getCourseByID'])->name('manager.edit.course');
+    Route::post('/cours/{id}', [CourController::class, 'updateCourseByID'])->name('manager.update.course');
+    Route::post('/cours/delete', [CourController::class, 'delete'])->name('manager.delete.course');
     // teacher
     //student
 });
-Route::get('/manager/calendar', [ManageController::class, 'getCalendar'])->name('getCalendar');
 
 //student
 Route::get('/student/calendar', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
@@ -46,10 +49,8 @@ Route::get('/student/cours', [StudentController::class, 'getListCours'])->name('
 
 //teacher
 
-// Route::get('/teacher/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
 
-
-Route::group(['prefix'=>'teacher'], function () { //, 'middleware'=>'auth'
+Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
     Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');

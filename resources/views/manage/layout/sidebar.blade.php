@@ -35,11 +35,17 @@
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
                 <a href="{{route('formations.index')}}" class="nav-link">
                     <span>
-                        Course Management
+                        Formation Management
                     </span>
                 </a>
             </li>
-
+            <li class="nav-item ">
+                <a href="{{ route('manager.cours')}}" class="nav-link">
+                    <span>
+                        Courses Management
+                    </span>
+                </a>
+            </li>
             <li class="nav-item ">
                 <a href="{{ route('manager.register')}}" class="nav-link">
                     <span>Create user account</span>

@@ -23,7 +23,10 @@ class ManageController extends Controller
 
     public function register() {
 
-        $formations = DB::table('formations')->where('id', '>', 0)->get();
+        $formations = DB::table('formations')
+        ->where('id', '>', 0)
+        ->where('deleted_at', '=', 0)
+        ->get();
         return view('manage.register.register', ['formations' => $formations]);
     }
 
@@ -54,6 +57,38 @@ class ManageController extends Controller
         $user->type = $request->type;
 
         $user->save();
+
+        return redirect()->back();
+    }
+
+    public function postCourse(Request $request) {
+
+        $intitule = $request['intitule'];
+        $user_id = $request['user_id'];
+        $formation_id = $request['formation_id'];
+        $date_debut = $request['date_debut'];
+        $date_fin = $request['date_fin'];
+
+        DB::table('cours')->insert([
+            'intitule' => $intitule,
+            'user_id' => $user_id,
+            'formation_id' => $formation_id
+        ]);
+
+        $cour = DB::table('cours')
+                    ->where([
+                        ['intitule',$intitule],
+                        ['user_id', $user_id],
+                        ['formation_id', $formation_id]
+                    ])
+                    ->get();
+        $cour_id = $cour[0]->id;
+
+        DB::table('plannings')->insert([
+            'cours_id' => $cour_id,
+            'date_debut' => $date_debut,
+            'date_fin' => $date_fin
+        ]);
 
         return redirect()->back();
     }
