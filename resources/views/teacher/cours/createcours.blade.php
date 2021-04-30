@@ -7,9 +7,9 @@
         <div class="container"><div class="row">
             <div class="col text-center">
                 @if($status == 0)
-                    <h1>Create Course</h1>
+                    <h1>Création de cours</h1>
                 @else
-                    <h1>Edit Course</h1>
+                    <h1>Modifier le cours</h1>
                 @endif
             </div>
         </div>
@@ -23,7 +23,7 @@
                                 <div class="row align-items-center">
                                     <div class="col mt-4">
                                         @if($status == 0)
-                                            <input type="text" class="form-control" placeholder="Name class" name="intitule" id="intitule">
+                                            <input type="text" class="form-control" placeholder="nom de cours" name="intitule" id="intitule">
                                         @else
                                             <label>{{$cour->intitule}}</label>
                                             <input name="id" value="{{$cour->id}}" hidden>
@@ -54,14 +54,14 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="example-date-input" class="col mt-4 col-form-label">Start time</label>
+                                                <label for="example-date-input" class="col mt-4 col-form-label">Date_début</label>
                                                 <div class="col mt-4">
                                                 <input class="form-control" type="date" value="{{$status == 1?substr($cour->date_debut,0, 10):''}}" id="date_debut" name="date_debut">
                                                 </div>
                                             </div>
 
                                             <div class="form-group row">
-                                                <label for="example-date-input" class="col mt-4 col-form-label">End time</label>
+                                                <label for="example-date-input" class="col mt-4 col-form-label">Date_fin</label>
                                                 <div class="col mt-4">
                                                 <input class="form-control" type="date" value="{{$status == 1?substr($cour->date_fin,0, 10):''}}" id="date_fin" name="date_fin">
                                                 </div>
@@ -69,7 +69,7 @@
 
                                             <div class="row mt-4">
                                                 <div class="col">
-                                                    <button class="btn btn-primary mt-4" type="submit">Submit</button>
+                                                    <button class="btn btn-primary mt-4" type="submit">Soumission</button>
                                                 </div>
                                             </div>
                                         </div>

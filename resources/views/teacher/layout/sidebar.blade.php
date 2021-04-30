@@ -23,6 +23,13 @@
                     <span>Course</span>
                 </a>
             </li>
+            
+
+            <li class="nav-item ">
+                <a href="{{route('manager.request')}}" class="nav-link">
+                    <span>Déconnexion</span>
+                </a>
+            </li>
 
 {{--            <li class="nav-item ">--}}
 {{--                <a href="{{route('logout')}}" class="nav-link">--}}
