@@ -49,23 +49,17 @@
                 <th>Course Title</th>
                 <th>Date start</th>
                 <th>Date end</th>
-                <th>Hủy đăng ký</th>
+
             </tr>
             </thead>
             <tbody>
             @foreach($cours as $key => $c)
-                <form action="{{url('/student/delete/'.$c->id)}}" method="POST" >
-                    @csrf
                 <tr>
                     <th scope="row">{{$key + 1}}</th>
                     <td>{{$c->intitule}}</td>
                     <td>{{$c->date_debut}}</td>
                     <td>{{$c->date_fin}}</td>
-                    <td>
-                        <button type="submit">Delete</button>
-                    </td>
                 </tr>
-                </form>
             @endforeach
             </tbody>
         </table>

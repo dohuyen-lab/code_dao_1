@@ -26,8 +26,9 @@
           </span>
                 <div class="multi-level collapse " role="list" id="submenu-app" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link" href="#"><span>Students</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href="#"><span>Teachers</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.student')}}"><span>Students</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.teacher')}}"><span>Teachers</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.register')}}"><span>Create user account</span></a></li>
                     </ul>
                 </div>
             </li>
@@ -46,18 +47,12 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a href="{{route('manager.register')}}" class="nav-link">
-                    <span>Create user account</span>
-                </a>
-            </li>
 
             <li class="nav-item ">
                 <a href="{{route('manager.request')}}" class="nav-link">
                     <span>Request</span>
                 </a>
             </li>
-
         </ul>
     </div>
 </nav>

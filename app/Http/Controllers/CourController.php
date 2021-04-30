@@ -153,7 +153,6 @@ class CourController extends Controller
 
     public function delete(Request $request){
         $id = $request['id'];
-
         DB::table('cours_users')->where('cours_id','=',$id)->delete();
         DB::table('plannings')->where('cours_id','=',$id)->delete();
         DB::table('cours')->where('id','=',$id)->delete();
