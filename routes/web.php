@@ -49,6 +49,7 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
 Route::group(['prefix'=>'student'], function () { //, 'middleware'=>'auth'
     Route::get('/', [StudentController::class, 'getStudentCalendar'])->name('getStudentCalendar');
     Route::get('/cours', [StudentController::class, 'getListCoursStudent'])->name('getListCoursStudent');
+    Route::post('/registercours', [StudentController::class, 'postRegisterCours'])->name('postRegisterCours');
     Route::post('/delete/{id}', [StudentController::class, 'postdeleteCours'])->name('postdeleteCours');
 
 });
