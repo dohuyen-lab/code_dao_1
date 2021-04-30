@@ -65,6 +65,7 @@ Route::group(['prefix'=>'student'], function () { //, 'middleware'=>'auth'
     Route::post('/delete/{id}', [StudentController::class, 'postdeleteCours'])->name('postdeleteCours');
     Route::get('/information', [InformationController::class, 'getInformation'])->name('getInformation');
     Route::get('/editinformation', [InformationController::class, 'editInformation'])->name('editInformation');
+    Route::post('/editinformation', [InformationController::class, 'postEditInformation'])->name('postEditInformation');
 });
 //teacher
 

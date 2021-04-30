@@ -41,8 +41,6 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Created time</th>
-                    <th>Update time</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -52,8 +50,6 @@
                             <tr>
                                 <th scope="row">{{$key + 1}}</th>
                                 <td>{{$coure->intitule}}</td>
-                                <td>{{$coure->created_at}}</td>
-                                <td>{{$coure->updated_at}}</td>
                                 <td>
                                     <form action="{{url('manager/formations/'.$coure->id)}}" method="POST" class="signin-form" enctype="multipart/form-data">
                                         <input type="hidden" name="_method" value="delete" />

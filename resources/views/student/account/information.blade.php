@@ -22,13 +22,12 @@
                             <div class="d-flex flex-column align-items-center text-center">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                 <div class="md-3">
-                                    <h4> Tên</h4>
+                                    <h4>{{$formation->nom}} {{$formation->prenom}}</h4>
                                     <p class="text-secondary mb-1">
                                     </p>
-                                    <p class="text-muted font-size-sm">Hà Nội </p>
                                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Chỉnh sửa thông tin</button> -->
-                                    <button onclick="editInformation()" class="btn btn-primary">Chỉnh sửa thông tin</button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Cài đặt tài khỏan</button>
+                                    <button onclick="editInformation({{$formation->id}})" class="btn btn-primary">Chỉnh sửa thông tin</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Đổi mật khẩu</button>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +42,7 @@
                                     <h6 class="mb-0">First Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-
+                                    {{$formation->nom}}
                                 </div>
                             </div>
                             <hr>
@@ -52,7 +51,7 @@
                                     <h6 class="mb-0">Last Name </h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-
+                                    {{$formation->prenom}}
                                 </div>
                             </div>
                             <hr>
@@ -61,7 +60,7 @@
                                     <h6 class="mb-0">Formation</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-
+                                    {{$formation->intitule}}
                                 </div>
                             </div>
 
@@ -88,12 +87,12 @@
                         <input hidden name="idUser" id="idUser" type="text">
                         <div class="form-group">
                             <label>First Name</label>
-                            <input type="text" name="firstname" class="form-control" value="">
+                            <input type="text" name="nom" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group">
                             <label>Last Name</label>
-                            <input type="text" name="lastname" class="form-control" value="">
+                            <input type="text" name="prenom" class="form-control" value="">
                             <small class="error form-text text-danger"></small>
                         </div>
                     </form>
@@ -101,7 +100,7 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button onclick="" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Cập nhật</button>
+                    <button onclick="submitEdit()" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Cập nhật</button>
                     <button class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
 
@@ -109,7 +108,7 @@
         </div>
     </div>
 <script>
-    function editInformation(){
+    function editInformation(id){
         event.preventDefault();
         $.ajax({
             type: 'GET',
@@ -118,12 +117,41 @@
             success: function(data) {
                 console.log(data);
                 $('#idUser').val(data.data.id);
-                $("#editInformationModal input[name=firstname]").val(data.data.nom);
-                $("#editInformationModal input[name=lastname]").val(data.data.prenom);
+                $("#editInformationModal input[name=nom]").val(data.data.nom);
+                $("#editInformationModal input[name=prenom]").val(data.data.prenom);
                 $("#editInformationModal").modal('show');
             },
             error: function(error) {
                 console.log(error);
+            }
+        });
+    }
+    function submitEdit(){
+        event.preventDefault();
+
+        var data = new FormData($("#editInformationModal form")[0]);
+
+        $.ajax({
+            url: "{{route('postEditInformation')}}",
+            method: 'post',
+            data: data,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                $('#editInformationModal').modal('hide');
+                toastr.success('Sửa thành công!')
+                window.location.reload().delay(500);
+
+            },
+            error: function(error) {
+                var errors = error.responseJSON;
+                console.log(errors.errors);
+                $.each(errors.errors, function(i, val) {
+                    $("#editInformationModal input[name=" + i + "]").siblings('.error').text(val[0]);
+
+                })
+
             }
         });
     }
