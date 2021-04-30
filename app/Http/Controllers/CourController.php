@@ -126,6 +126,20 @@ class CourController extends Controller
         ]);
     }
 
+    public function editCours(Request $request){
+        $date_debut = $request['date_debut'];
+        $date_fin = $request['date_fin'];
+        $id = $request['id'];
+
+        DB::table('plannings')
+            ->where(['cours_id',$id])
+            ->update([
+                'date_debut' => $date_debut,
+                'date_fin' => $date_fin
+            ]);
+        return $this->getAll();
+    }
+
     public function update(Request $request, $id) {
         $intitule = $request['intitule'];
         $user_id = $request['user_id'];

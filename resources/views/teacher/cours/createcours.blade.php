@@ -25,6 +25,8 @@
                                             <input type="text" class="form-control" placeholder="Name class" name="intitule" id="intitule">
                                         @else 
                                             <label>{{$cour->intitule}}</label>
+                                            <input name="id" value="{{$cour->id}}" hidden>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row align-items-center">
