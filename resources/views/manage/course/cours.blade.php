@@ -3,6 +3,11 @@
 @section('title','manage Calenda')
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        @if (!empty($message))
+            <div class="alert alert-success" role="alert">
+                <strong>{{$message}}</strong>
+            </div>
+        @endif
         <div class="d-block mb-4 mb-md-0">
             <h2 class="h4">Courses List</h2>
         </div>
@@ -13,13 +18,11 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
             <div class="d-block mb-4 mb-md-0">
-
-                {{-- <button class="btn btn-success" type="submit" style="width: 150px; height: 10; border-radius: 0px; ">Create Course</button> --}}
-                <form method="GET" action="{{route('storeCours')}}">
+                <a href="{{route('manager.store.cours')}}">
                     <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                         Create course
                     </button>
-               </form>
+                </a>
         </div>
         </div>
 
@@ -59,11 +62,11 @@
                             <td>{{$c->date_fin}}</td>
                             <td>
                                 <div class="d-flex">
-                                    <form method="GET" action="{{url('/manager/cours/edit/'.$c->id)}}">
+                                    <a href="{{url('/manager/cours/edit/'.$c->id)}}">
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-success" value="edit" >
                                         </div>
-                                    </form>&nbsp;&nbsp;
+                                    </a>&nbsp;&nbsp;
                                     <form method="POST" action="{{route('manager.delete.course')}}">
                                         {{ csrf_field() }}
                                         <div class="form-group">

@@ -41,9 +41,8 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     ]);
     //cours -> lớp học
     Route::get('cours', [CourController::class, 'getAll'])->name('manager.cours');
-    Route::post('/cours/store', [ManageController::class, 'postCourse'])->name('manager.post.course');
+    Route::get('/cours/store', [CourController::class, 'getStore'])->name('manager.store.cours');
     Route::get('/cours/edit/{id}', [CourController::class, 'getCourse'])->name('manager.edit.course');
-    Route::post('/cours/edit/{id}', [CourController::class, 'update'])->name('manager.update.course');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('manager.delete.course');
 
     Route::get('/accept', [ManageController::class, 'getRequest'])->name('manager.request');
@@ -76,5 +75,5 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
     Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
 
     Route::get('/cours/edit', [CourController::class, 'getCours'])->name('editCours');
-    Route::post('/cours/edit', [CourController::class, 'update'])->name('updateCours');
+    Route::post('/cours/edit', [CourController::class, 'editCours'])->name('updateCours');
 });
