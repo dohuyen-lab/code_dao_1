@@ -63,4 +63,36 @@ class BaseController extends Controller
         }
     }
 
+    public function signup(Request $request){
+        $this->validate($request,
+        [
+            'mdp' => 'min:8|required',
+            'nom' => 'requited',
+            'prenom' => 'requited',
+            'login' => 'requited'
+        ],
+        [
+            'mdp.min' => 'Password must be longer than 8 characters',
+            'nom.requited' => 'Please enter nom',
+            'prenom.requited' => 'Please enter prenom',
+            'login.requited' => 'Please enter login'
+        ]
+        );
+        $nom = $request['nom'];
+        $prenom = $request['prenom'];
+        $login = $request['login'];
+        $mdp = $request['mdp'];
+
+        $mdp = Hash::make($mdp);
+        
+        DB::table('users')
+            ->insert([
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'login' => $login,
+                'mdp' => $mdp
+            ]);
+        return view('login.login');
+    }
+
 }
