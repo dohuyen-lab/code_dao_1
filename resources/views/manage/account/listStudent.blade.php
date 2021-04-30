@@ -42,7 +42,6 @@
                         <td>{{$s->login}}</td>
                         <td>{{$s->intitule}}</td>
                         <td>
-
                             <button class="btn btn-danger" type="submit">Supprimer</button>
                         </td>
                     </tr>

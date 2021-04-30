@@ -28,9 +28,6 @@
                 <tbody>
                 @if(!empty($requests))
                 @foreach($requests as $key => $s)
-                    <form action="{{url('/manager/accept/')}}" method="POST" >
-                        @csrf
-                        <input name="user_id" id="user_id" value="{{$s->id}}" hidden>
                     <tr>
                         <th scope="row">{{$key + 1}}</th>
                         <td>{{$s->nom}}</td>
@@ -43,10 +40,19 @@
                         </select>
                         </td>
                         <td>
-                            <button type="submit">Accept</button>
+                            <div class="d-flex">
+                                <form action="{{url('/manager/accept/')}}" method="POST" >
+                                    @csrf
+                                    <input name="user_id" id="user_id" value="{{$s->id}}" hidden>
+                                <button class="btn btn-primary"type="submit">Accepter</button>
+                                </form>&nbsp;
+                                <form method="post" action="{{url('/manager/delete/'.$s->id)}}">
+                                    @csrf
+                                    <button class="btn btn-danger"type="submit">Refuser</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
-                    </form>
                 @endforeach
                 @endif
                 </tbody>
