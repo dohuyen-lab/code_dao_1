@@ -17,7 +17,7 @@
             </div>
         </div>
         <ul class="nav flex-column">
-            <li class="nav-item">
+        <li class="nav-item">
           <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-app">
             <span>
                Gestion des utilisateurs
@@ -28,10 +28,10 @@
                     <ul class="flex-column nav">
                         <li class="nav-item "><a class="nav-link" href="{{route('manager.student')}}"><span>Etudiants</span></a></li>
                         <li class="nav-item "><a class="nav-link" href="{{route('manager.teacher')}}"><span>Enseignants</span></a></li>
-                        <li class="nav-item "><a class="nav-link" href="{{route('manager.register')}}"><span> Créer d’utilisateur</span></a></li>
+                        <li class="nav-item "><a class="nav-link" href="{{route('manager.register')}}"><span>Créer d’utilisateur</span></a></li>
                     </ul>
                 </div>
-            </li>
+        </li>
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
                 <a href="{{route('formations.index')}}" class="nav-link">
