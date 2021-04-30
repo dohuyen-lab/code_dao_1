@@ -1,23 +1,20 @@
-@extends('manage.layout.master')
+@extends('teacher.layout.master')
 @section('category', 'Contact')
 @section('title','manage Calenda')
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
-            <h2 class="h4">Courses List</h2>
+            <h2 class="h4">Courses List Teacher</h2>
         </div>
     </div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
             <div class="d-block mb-4 mb-md-0">
-
-                {{-- <button class="btn btn-success" type="submit" style="width: 150px; height: 10; border-radius: 0px; ">Create Course</button> --}}
-                <form method="GET" action="{{route('storeCours')}}">
+                <a href="{{route('storeCours')}}">
                     <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                         Create course
                     </button>
-               </form>
-               
+                </a>
         </div>
         </div>
 
@@ -56,20 +53,20 @@
                             <td>{{$c->date_debut}}</td>
                             <td>{{$c->date_fin}}</td>
                             <td>
-                                <form method="GET" action="{{route('editCours')}}">
-                                    {{ csrf_field() }}
-                                    <div class="form-group">
-                                        <input type="text" value="{{$c->id}}" name="id" hidden>
-                                        <input type="submit" class="btn btn-success" value="edit" >
-                                    </div>
-                                </form>
-                                <form method="POST" action="{{route('deleteCours')}}">
-                                    {{ csrf_field() }}
-                                    <div class="form-group">
-                                        <input type="text" value="{{$c->id}}" name="id" hidden>
-                                        <input type="submit" class="btn btn-danger" value="deltete" >
-                                    </div>
-                                </form>
+                                <div class="d-flex">
+                                    <a href="{{url('/teacher/cours/edit/'.$c->id)}}">
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-success" value="edit" >
+                                        </div>
+                                    </a>&nbsp;&nbsp;
+                                    <form method="POST" action="{{route('deleteCours')}}">
+                                        {{ csrf_field() }}
+                                        <div class="form-group">
+                                            <input type="text" value="{{$c->id}}" name="id" hidden>
+                                            <input type="submit" class="btn btn-danger" value="deltete" >
+                                        </div>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

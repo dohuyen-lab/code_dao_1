@@ -24,10 +24,10 @@
                                 <span class="mb-0 font-small font-weight-bold">
                                         @if (Session::has('user'))
                                         <?php
-                                        $user = Session::get('user');
-                                        echo $user[0][0]->nom ." ".$user[0][0]->prenom
+                                            $user = Session::get('user');
+                                            echo $user[0][0]->nom ." ".$user[0][0]->prenom
                                         ?>
-                                    @endif
+                                        @endif
                                 </span>
                             </div>
                         </div>
