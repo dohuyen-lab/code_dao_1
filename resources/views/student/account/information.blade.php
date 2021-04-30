@@ -115,8 +115,12 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
+<<<<<<< HEAD
 
                     <h4 class="modal-title">Changer mot de passe</h4>
+=======
+                    <h4 class="modal-title">Đổi password</h4>
+>>>>>>> 73ddab6e05f1b580828dcf5a30ee05c02471e4c2
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
