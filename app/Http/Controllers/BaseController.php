@@ -69,19 +69,22 @@ class BaseController extends Controller
             'mdp' => 'min:8|required',
             'nom' => 'requited',
             'prenom' => 'requited',
-            'login' => 'requited'
+            'login' => 'requited',
+            'formation' => 'requited'
         ],
         [
             'mdp.min' => 'Password must be longer than 8 characters',
             'nom.requited' => 'Please enter nom',
             'prenom.requited' => 'Please enter prenom',
-            'login.requited' => 'Please enter login'
+            'login.requited' => 'Please enter login',
+            'formation.requited' => 'please choose formation'
         ]
         );
         $nom = $request['nom'];
         $prenom = $request['prenom'];
         $login = $request['login'];
         $mdp = $request['mdp'];
+        $formation_id = $request['formation'];
 
         $mdp = Hash::make($mdp);
         
@@ -90,9 +93,19 @@ class BaseController extends Controller
                 'nom' => $nom,
                 'prenom' => $prenom,
                 'login' => $login,
-                'mdp' => $mdp
+                'mdp' => $mdp,
+                'formation_id' => $formation_id
             ]);
         return view('login.login');
+    }
+
+    public function getSignup(){
+        $formation = DB::table('formations')
+                        ->where('delete_at',0)
+                        ->get();
+        return view('login.signup',[
+            'formations' => $formation
+        ]);
     }
 
 }

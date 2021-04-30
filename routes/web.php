@@ -24,9 +24,7 @@ Route::get('/login', 'BaseController@login')->name('login');
 Route::post('/login', 'BaseController@postLogin')->name('post.login');
 Route::get('/logout', 'BaseController@logout')->name('logout');
 
-Route::get('/signup', function(){
-                return view('login.signup');
-            })->name('signup');
+Route::get('/signup', 'BaseController@getSignup')->name('signup');
 Route::post('/signup', 'BaseController@signup')->name('signup');
 
  //manage
