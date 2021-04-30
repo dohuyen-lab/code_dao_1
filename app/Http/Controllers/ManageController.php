@@ -23,33 +23,35 @@ class ManageController extends Controller
     public function getListStudent() {
         $data =[];
         $student = DB::table('users')
-            ->where('users.type', 'etudiant')
+            ->where('users.type', '=', 'etudiant')
             ->join('formations','users.formation_id','=','formations.id')
             ->select('users.*','formations.intitule')
             ->get();
         $data['student'] = $student;
         return view('manage.account.listStudent', $data);
     }
+
     public function getListTeacher() {
         $data =[];
         $teacher = DB::table('users')
-            ->where('users.type', 'enseignant')
+            ->where('users.type', '=', 'enseignant')
             ->join('formations','users.formation_id','=','formations.id')
             ->select('users.*','formations.intitule')
             ->get();
         $data['teacher'] = $teacher;
         return view('manage.account.listTeacher', $data);
     }
+
     public function postdeleteAccount($id){
         $user_id = User::find($id);
         $user_id = $user_id->id;
-        $cour_user = DB::table('cours_users')
+        DB::table('cours_users')
             ->where('user_id','=',$user_id)
             ->delete();
-        $cour = DB::table('cours')
+        DB::table('cours')
             ->where('user_id',$user_id)
             ->delete();
-        $user = DB::table('users')
+        DB::table('users')
             ->where('id',$user_id)
             ->delete();
 
@@ -59,7 +61,7 @@ class ManageController extends Controller
     public function register() {
 
         $formations = DB::table('formations')
-        ->where('id', '>', 0)
+        ->where('id', '>', 1)
         ->where('deleted_at', '=', 0)
         ->get();
         return view('manage.register.register', ['formations' => $formations]);
@@ -79,7 +81,7 @@ class ManageController extends Controller
         ]
         );
 
-        $formation_id = $request->formation_id ? $request->formation_id : 0;
+        $formation_id = $request->formation_id ? $request->formation_id : 1;
 
         $user = new User();
 
@@ -146,6 +148,70 @@ class ManageController extends Controller
             'date_fin' => $date_fin
         ]);
 
+        return redirect()->back();
+    }
+
+    public function searchCourse() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $list = DB::table('cours')
+                        ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
+                        ->join('plannings','cours.id','=','plannings.cours_id')
+                        ->join('formations','cours.formation_id','=','formations.id')
+                        ->where('cours.intitule', 'like', '%'.$text.'%')
+                        ->get();
+            return view('manage.course.cours',[
+                'cours'=> $list
+            ]);
+        }
+        return redirect()->back();
+    }
+
+    public function searchFormation() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $coures = DB::table('formations')
+            ->where('deleted_at', '=', 0)
+            ->where('intitule', 'like', '%'.$text.'%')
+            ->paginate(15);
+        return view('manage.course.course',['coures' => $coures]);
+        }
+        return redirect()->back();
+    }
+
+    public function searchStudent() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $student = DB::table('users')
+            ->where('users.type', 'etudiant')
+            ->where('users.nom', 'like', '%'.$text.'%')
+            ->orWhere('users.prenom', 'like', '%'.$text.'%')
+            ->join('formations','users.formation_id','=','formations.id')
+            ->select('users.*','formations.intitule')
+            ->get();
+            $data['student'] = $student;
+            return view('manage.account.listStudent', $data);
+        }
+        return redirect()->back();
+    }
+
+    public function searchTeacher() {
+        if (isset($_GET['search'])) {
+            $text = $_GET['search'];
+
+            $teacher = DB::table('users')
+            ->where('users.type', '=', 'enseignant')
+            ->where('users.nom', 'like', '%'.$text.'%')
+            ->orWhere('users.prenom', 'like', '%'.$text.'%')
+            ->join('formations','users.formation_id','=','formations.id')
+            ->select('users.*','formations.intitule')
+            ->get();
+            $data['teacher'] = $teacher;
+            return view('manage.account.listTeacher', $data);
+        }
         return redirect()->back();
     }
 }

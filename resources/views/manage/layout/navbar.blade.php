@@ -6,7 +6,6 @@
                 <a class="btn btn-default" href="{{route('manager.index')}}">
                     Home
                 </a>
-                
             </div>
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
@@ -30,7 +29,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
-                        <a class="dropdown-item font-weight-bold" href="{{route('logout')}}"><span class="fas fa-sign-out-alt text-danger"></span>Logout</a>
+                        <a class="dropdown-item font-weight-bold" href="{{route('logout')}}"><span class="fas fa-sign-out-alt text-danger"></span>Déconnexion</a>
                     </div>
                 </li>
             </ul>

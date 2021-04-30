@@ -92,7 +92,6 @@ class CourController extends Controller
                         ->join('plannings','cours.id','=','plannings.cours_id')
                         ->join('formations','cours.formation_id','=','formations.id')
                         ->get();
-            // dd($user);
         } else{
             $list = DB::table('cours')
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
@@ -215,7 +214,7 @@ class CourController extends Controller
         }else {
             $isnext = $request['isnext'];
             if($isnext) $date = $date->addDays(7);
-            else $date = $date->subDays(7); 
+            else $date = $date->subDays(7);
         }
 
         $user = DB::table('users')
