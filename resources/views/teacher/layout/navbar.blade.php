@@ -22,19 +22,11 @@
                         <div class="media d-flex align-items-center">
                             <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
                                 <span class="mb-0 font-small font-weight-bold">
-                                        @if (Session::has('user'))
-                                        <?php
-                                            $user = Session::get('user');
-                                            echo $user[0][0]->nom ." ".$user[0][0]->prenom
-                                        ?>
-                                        @endif
+                                    <a class="dropdown-item font-weight-bold" href="{{route('logout')}}"><span class="fas fa-sign-out-alt text-danger"></span>Logout</a>
                                 </span>
                             </div>
                         </div>
                     </a>
-                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
-                        <a class="dropdown-item font-weight-bold" href="{{route('logout')}}"><span class="fas fa-sign-out-alt text-danger"></span>Logout</a>
-                    </div>
                 </li>
             </ul>
         </div>
