@@ -67,17 +67,20 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col">
-                                
+
                                 <select name="formation" id="formation" class="form-control" required="required">
                                 @foreach($formations as $key => $f)
                                     <option value="{{$f->id}}">{{$f->intitule}}</option>
                                     @endforeach
                                 </select>
-                                
+
                             </div>
                         </div>
-                        <div class="row mt-4">
+                        <div class="mt-4">
                             <div class="col">
+                                <a href="{{route('login')}}" >Login</a>
+                            </div>
+                            <div class="col d-block">
                                 <button class="btn btn-outline-secondary" type="submit">Submit</button>
                             </div>
                         </div>
