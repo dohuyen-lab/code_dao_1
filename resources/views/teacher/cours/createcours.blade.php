@@ -13,7 +13,8 @@
                 @endif
             </div>
         </div>
-            <form method="POST" action="{{$status? route('storeCours') : route('editCours')}}">
+            <form method="POST" action="{{$status == 0? route('storeCours') : route('editCours')}}">
+                @csrf
                 <section class="fdb-block">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -23,7 +24,7 @@
                                     <div class="col mt-4">
                                         @if($status == 0)
                                             <input type="text" class="form-control" placeholder="Name class" name="intitule" id="intitule">
-                                        @else 
+                                        @else
                                             <label>{{$cour->intitule}}</label>
                                             <input name="id" value="{{$cour->id}}" hidden>
                                         @endif
@@ -31,22 +32,22 @@
                                 </div>
                                 <div class="row align-items-center">
                                             <div class="col mt-4">
-                                                
-                                                    <select name="user_id" id="user_id" class="form-control" required="required">
-                                                         @foreach($teachers as $key => $t)
-                                                            <option value="{{ $t->id }}">{{ $t->nom + $t->prenom }}</option>
-                                                        @endfor 
+
+                                                    <select name="user_id" id="user_id" class="form-control" required="required" {{$status == 0? '': 'disabled'}}>
+                                                        @foreach($teachers as $key => $t)
+                                                            <option value="{{ $t->id }}">{{ $t->nom.' '.$t->prenom }}</option>
+                                                        @endforeach
                                                     </select>
-                                                    
+
                                             </div>
                                         </div>
                                             <div class="row align-items-center">
                                                 <div class="col mt-4">
 
-                                                    <select name="formation_id" id="formation_id" class="form-control" required="required">
-                                                         @foreach($fomations as $key => $f)
+                                                    <select name="formation_id" id="formation_id" class="form-control" required="required" {{$status == 0? '': 'disabled'}}>
+                                                        @foreach($formations as $key => $f)
                                                             <option value="{{ $f->id }}">{{ $f->intitule }}</option>
-                                                        @endfor 
+                                                        @endforeach
                                                     </select>
 
                                                 </div>
@@ -55,14 +56,14 @@
                                             <div class="form-group row">
                                                 <label for="example-date-input" class="col mt-4 col-form-label">Start time</label>
                                                 <div class="col mt-4">
-                                                <input class="form-control" type="date" value="{{$cour->date_debut}}" id="date_debut" name="date_debut">
+                                                <input class="form-control" type="date" value="{{$status == 1?substr($cour->date_debut,0, 10):''}}" id="date_debut" name="date_debut">
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group row">
                                                 <label for="example-date-input" class="col mt-4 col-form-label">End time</label>
                                                 <div class="col mt-4">
-                                                <input class="form-control" type="date" value="{{$cour->date_fin}}" id="date_fin" name="date_fin">
+                                                <input class="form-control" type="date" value="{{$status == 1?substr($cour->date_fin,0, 10):''}}" id="date_fin" name="date_fin">
                                                 </div>
                                             </div>
 
@@ -76,8 +77,7 @@
                                 </div>
                             </section>
                         </div>
-                        
-             </form>
+            </form>
         </div>
     </section>
 @endsection

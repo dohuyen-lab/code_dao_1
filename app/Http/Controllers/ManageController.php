@@ -79,16 +79,15 @@ class ManageController extends Controller
         ]
         );
 
+        $formation_id = $request->formation_id ? $request->formation_id : 0;
+
         $user = new User();
 
         $user->nom = $request->firstname;
         $user->prenom = $request->lastname;
         $user->login = $request->username;
         $user->mdp = Hash::make($request->password);
-
-        if ($request->formation_id) {
-            $user->formation_id = $request->formation_id;
-        }
+        $user->formation_id = $formation_id;
         $user->type = $request->type;
 
         $user->save();
@@ -100,8 +99,8 @@ class ManageController extends Controller
         $r = DB::table('users')
                 ->where('type', '=', null)
                 ->get();
-        
-        return view('',[
+
+        return view('manage.account.listRequest',[
             'requests' => $r
         ]);
     }

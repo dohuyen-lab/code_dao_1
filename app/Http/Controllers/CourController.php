@@ -18,9 +18,10 @@ class CourController extends Controller
                     ->where('id', $user_id)
                     ->get();
         $formation = DB::table('formations')
+                        ->where('deleted_at', '=', 0)
                         ->get();
-        
-        if($user->type == "admin"){
+
+        if($user[0]->type == "admin"){
             $user = DB::table('users')
                         ->where('type', 'enseignant')
                         ->get();
@@ -62,7 +63,11 @@ class CourController extends Controller
             'date_fin' => $date_fin
         ]);
 
-        return $this->getAll();
+        $user = Session::get('user');
+        if ($user[0][0]->type == 'admin') {
+            return redirect()->route('manager.cours', ['message'=>'Create success']);
+        }
+        return redirect()->back()->with(['message'=>'Create success']);
     }
 
     public function getAll() {
@@ -99,8 +104,8 @@ class CourController extends Controller
         ]);
     }
 
-    public function getCourse(Request $request) {
-        $cour_id = $request['id'];
+    public function getCourse(Request $request, $id) {
+        $cour_id = $request['id'] | $id;
 
         $cour_edit = DB::table('cours')
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin')
@@ -109,20 +114,20 @@ class CourController extends Controller
                         ->get();
         $teacher = DB::table('cours')
                         ->select('users.nom','users.prenom','users.id')
-                        ->join('users','users.id','=','cours.users_id')
+                        ->join('users','users.id','=','cours.user_id')
                         ->where('cours.id', '=', $cour_id)
                         ->get();
-        $formation = DB::table('cours')
-                        ->select('formations.intitule')
+        $formations = DB::table('cours')
+                        ->select('formations.intitule','formations.id')
                         ->join('formations','cours.formation_id','=','formations.id')
                         ->where('cours.id', '=', $cour_id)
                         ->get();
 
         return view('teacher.cours.createcours',[
             'teachers' => $teacher,
-            'formations' => $formation,
+            'formations' => $formations,
             'status' => 1,
-            'cour' => $cour_edit
+            'cour' => $cour_edit[0]
         ]);
     }
 
@@ -132,12 +137,18 @@ class CourController extends Controller
         $id = $request['id'];
 
         DB::table('plannings')
-            ->where(['cours_id',$id])
+            ->where('cours_id', '=',$id)
             ->update([
                 'date_debut' => $date_debut,
                 'date_fin' => $date_fin
             ]);
-        return $this->getAll();
+
+        $user = Session::get('user');
+
+        if ($user[0][0]->type == 'admin') {
+            return redirect()->route('manager.cours')->with(['message'=>'Create success']);
+        }
+        return redirect()->back()->with(['message'=>'Create success']);
     }
 
     public function update(Request $request, $id) {
@@ -157,12 +168,12 @@ class CourController extends Controller
 
         DB::table('plannings')
         ->where('cours_id', '=', $id)
-        ->insert([
+        ->update([
             'date_debut' => $date_debut,
             'date_fin' => $date_fin
         ]);
 
-        return $this->getAll();
+        return redirect()->back();
     }
 
     public function delete(Request $request){

@@ -4,7 +4,7 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4" style="padding-bottom: 5px !important;">
         <div class="d-block mb-4 mb-md-0">
-            <h2 class="h4">Courses List</h2>
+            <h2 class="h4">Formations List</h2>
         </div>
     </div>
 

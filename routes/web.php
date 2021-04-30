@@ -41,13 +41,12 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     ]);
     //cours -> lớp học
     Route::get('cours', [CourController::class, 'getAll'])->name('manager.cours');
-    Route::post('/cours/store', [ManageController::class, 'postCourse'])->name('manager.post.course');
-    Route::get('/cours/{id}', [CourController::class, 'getCourse'])->name('manager.edit.course');
-    Route::post('/cours/{id}', [CourController::class, 'updateCourseByID'])->name('manager.update.course');
+    Route::get('/cours/store', [CourController::class, 'getStore'])->name('manager.store.cours');
+    Route::get('/cours/edit/{id}', [CourController::class, 'getCourse'])->name('manager.edit.course');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('manager.delete.course');
 
-    Route::get('/accept', [CourController::class, 'getRequest'])->name('manager.request');
-    Route::post('/accept', [CourController::class, 'acceptRequest'])->name('manager.request');
+    Route::get('/accept', [ManageController::class, 'getRequest'])->name('manager.request');
+    Route::post('/accept', [ManageController::class, 'acceptRequest'])->name('manager.request');
     // teacher
     Route::get('/teacher', [ManageController::class, 'getListTeacher'])->name('manager.teacher');
     //student
@@ -76,6 +75,5 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
     Route::post('/cours/store', [CourController::class, 'store'])->name('storeCours');
 
     Route::get('/cours/edit', [CourController::class, 'getCours'])->name('editCours');
-    Route::post('/cours/edit', [CourController::class, 'editCours'])->name('editCours');
-
+    Route::post('/cours/edit', [CourController::class, 'editCours'])->name('updateCours');
 });
