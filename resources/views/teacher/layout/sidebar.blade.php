@@ -23,13 +23,6 @@
                     <span>Cours</span>
                 </a>
             </li>
-
-
-            <li class="nav-item ">
-                <a href="{{route('getListCours')}}" class="nav-link">
-                    <span>Déconnexion</span>
-                </a>
-            </li>
         </ul>
     </div>
 </nav>
