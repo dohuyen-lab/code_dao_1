@@ -76,14 +76,14 @@
                                 <div class="d-flex">
                                     <a href="{{url('/teacher/cours/edit/'.$c->id)}}">
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-success" value="edit" >
+                                            <input type="submit" class="btn btn-success" value="Éditer" >
                                         </div>
                                     </a>&nbsp;&nbsp;
                                     <form method="POST" action="{{route('deleteCours')}}">
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <input type="text" value="{{$c->id}}" name="id" hidden>
-                                            <input type="submit" class="btn btn-danger" value="deltete" >
+                                            <input type="submit" class="btn btn-danger" value="supprimer" >
                                         </div>
                                     </form>
                                 </div>

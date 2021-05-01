@@ -226,7 +226,7 @@ class CourController extends Controller
                             ['plannings.date_debut','<',$date],
                             ['plannings.date_fin','>',$date]
                         ])
-                        ->get();
+                        ->paginate(15);
             // dd($user);
         } else{
             $list = DB::table('cours')
@@ -238,7 +238,7 @@ class CourController extends Controller
                             ['plannings.date_debut','<',$date],
                             ['plannings.date_fin','>',$date]
                             ])
-                        ->get();
+                        ->paginate(15);
         }
 
         if ($user[0]->type == 'admin') {
