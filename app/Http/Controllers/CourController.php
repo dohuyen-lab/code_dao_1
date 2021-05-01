@@ -18,6 +18,7 @@ class CourController extends Controller
         $user = DB::table('users')
                     ->where('id', $user_id)
                     ->get();
+
         $formation = DB::table('formations')
                         ->where('deleted_at', '=', 0)
                         ->get();
@@ -31,19 +32,36 @@ class CourController extends Controller
                 'formations' => $formation,
                 'status' => 0
             ]);
+        } else {
+            return view('teacher.cours.createcours',[
+                'teachers' => $user,
+                'formations' => $formation,
+                'status' => 0
+            ]);
         }
-
-        return view('teacher.cours.createcours',[
-            'teachers' => $user,
-            'formations' => $formation,
-            'status' => 0
-        ]);
     }
 
     public function store(Request $request) {
+        $date = $request['date'];
+        $heure_debut = $request['heure_debut'];
+        $heure_fin = $request['heure_fin'];
+        $cours_id = $request['cours_id'];
+
+        $date_debut = $date.' '.$heure_debut;
+        $date_fin = $date.' '.$heure_fin;
+        DB::table('plannings')->insert([
+            'cours_id' => $cours_id,
+            'date_debut' => $date_debut,
+            'date_fin' => $date_fin
+        ]);
+
+        return redirect()->back()->with(['message'=>'Create success']);
+    }
+
+    public function storeByManager (Request $request) {
+        $user_id = $request['user_id'];
 
         $intitule = $request['intitule'];
-        $user_id = $request['user_id'];
         $formation_id = $request['formation_id'];
         $date_debut = $request['date_debut'];
         $date_fin = $request['date_fin'];
@@ -69,11 +87,7 @@ class CourController extends Controller
             'date_fin' => $date_fin
         ]);
 
-        $user = Session::get('user');
-        if ($user[0][0]->type == 'admin') {
-            return redirect()->route('manager.cours', ['message'=>'Create success']);
-        }
-        return redirect()->back()->with(['message'=>'Create success']);
+        return redirect()->route('manager.cours', ['message'=>'Create success']);
     }
 
     public function getAll() {
@@ -91,14 +105,16 @@ class CourController extends Controller
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
                         ->join('plannings','cours.id','=','plannings.cours_id')
                         ->join('formations','cours.formation_id','=','formations.id')
-                        ->get();
+                        ->orderBy('cours.intitule', 'asc')
+                        ->paginate(15);
         } else{
             $list = DB::table('cours')
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
                         ->join('plannings','cours.id','=','plannings.cours_id')
                         ->join('formations','cours.formation_id','=','formations.id')
                         ->where('cours.user_id', '=', $user_id)
-                        ->get();
+                        ->orderBy('cours.intitule', 'asc')
+                        ->paginate(15);
         }
 
         if ($user[0]->type == 'admin') {
@@ -150,9 +166,16 @@ class CourController extends Controller
     }
 
     public function editCours(Request $request){
-        $date_debut = $request['date_debut'];
-        $date_fin = $request['date_fin'];
+        $user = Session::get('user');
         $id = $request['id'];
+
+        if ($user[0][0]->type == 'admin') {
+            $date_debut = $request['date_debut'];
+            $date_fin = $request['date_fin'];
+        } else {
+            $date_debut = $request['date'].' '.$request['heure_debut'].':00';
+            $date_fin = $request['date'].' '.$request['heure_fin'].':00';
+        }
 
         DB::table('plannings')
             ->where('cours_id', '=',$id)
@@ -161,37 +184,10 @@ class CourController extends Controller
                 'date_fin' => $date_fin
             ]);
 
-        $user = Session::get('user');
-
         if ($user[0][0]->type == 'admin') {
             return redirect()->route('manager.cours')->with(['message'=>'Create success']);
         }
         return redirect()->route('getListCours')->with(['message'=>'Create success']);
-    }
-
-    public function update(Request $request, $id) {
-        $intitule = $request['intitule'];
-        $user_id = $request['user_id'];
-        $formation_id = $request['formation_id'];
-        $date_debut = $request['date_debut'];
-        $date_fin = $request['date_fin'];
-
-        DB::table('cours')
-        ->where('id','=', $id)
-        ->update([
-            'intitule' => $intitule,
-            'user_id' => $user_id,
-            'formation_id' => $formation_id
-        ]);
-
-        DB::table('plannings')
-        ->where('cours_id', '=', $id)
-        ->update([
-            'date_debut' => $date_debut,
-            'date_fin' => $date_fin
-        ]);
-
-        return redirect()->back();
     }
 
     public function delete(Request $request){
@@ -255,5 +251,18 @@ class CourController extends Controller
             'cours'=> $list,
             'now' => $date
         ]);
+    }
+
+    public function getCourseByFormationID() {
+        $user = Session::get('user');
+        $user_id = $user[0][0]->id;
+
+        $id = $_GET['id'];
+
+        $course = DB::table('cours')
+            ->where('user_id', '=', $user_id)
+            ->where('formation_id', '=', $id)
+            ->get();
+        return response()->json($course);
     }
 }

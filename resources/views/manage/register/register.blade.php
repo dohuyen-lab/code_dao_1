@@ -40,7 +40,7 @@
                         </div>
                         <div class="row align-items-center">
                             <div class="col mt-4">
-                                <input type="text" class="form-control" name="username" placeholder="User Name" required>
+                                <input type="text" class="form-control" name="username" placeholder="Identifiant " required>
                             </div>
                         </div>
                         <div class="row align-items-center">

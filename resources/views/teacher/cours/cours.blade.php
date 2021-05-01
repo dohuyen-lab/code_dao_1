@@ -2,17 +2,17 @@
 @section('category', 'Contact')
 @section('title','manage Calenda')
 @section('content')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
-        <div class="d-block mb-4 mb-md-0">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2">
+        <div class="d-block mb-1 mb-md-0">
             <h2 class="h4">Liste de cours</h2>
         </div>
     </div>
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2">
         <div class="d-block mb-4 mb-md-0">
             <div class="d-block mb-4 mb-md-0">
                 <a href="{{route('storeCours')}}">
                     <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                        Création de cours
+                        Création de séance
                     </button>
                 </a>
         </div>
@@ -23,23 +23,23 @@
     <!-- Xep theo Tuan -->
     <div>
     @if(!empty($date))
-            <form method="GET" action="{{route('getListCoursWeek')}}">
+            <form method="GET" class="mb-3" action="{{route('getListCoursWeek')}}">
                 <input name="isnext" value="false" hidden>
                 <button type="submit" name="date" value="{{$date}}">Prevew</button>
             </form>
         @endif
 
-        <form method="GET" action="{{route('getListCoursWeek')}}">
-            <button type="submit" name="date" value="0">Trier la semaine</button>
+        <form method="GET" class="mb-3" action="{{route('getListCoursWeek')}}">
+            <button type="submit" name="date" value="0">Tri par semaine</button>
         </form>
 
         @if(!empty($date))
-            <form method="GET" action="{{route('getListCoursWeek')}}">
+            <form method="GET" class="mb-3" action="{{route('getListCoursWeek')}}">
                 <input name="isnext" value="true" hidden>
                 <button type="submit" name="date" value="{{$date}}">Suivant</button>
             </form>
         @endif
-        
+
     </div>
 
     <div class="table-settings mb-4">
@@ -54,7 +54,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Serial</th>
+                <th>N°</th>
                 <th>Intitule</th>
                 <th>Formation</th>
                 <th>Date Debut</th>
@@ -93,6 +93,6 @@
                 @endif
             </tbody>
         </table>
-
+        {{$cours->links()}}
 
 @endsection

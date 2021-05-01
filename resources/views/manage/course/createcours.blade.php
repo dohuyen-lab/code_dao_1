@@ -13,7 +13,7 @@
                 @endif
             </div>
         </div>
-            <form method="POST" action="{{$status == 0? route('storeCours') : route('updateCours')}}">
+            <form method="POST" action="{{$status == 0? route('manager.store.post') : route('updateCours')}}">
                 @csrf
                 <section class="fdb-block">
                     <div class="container">

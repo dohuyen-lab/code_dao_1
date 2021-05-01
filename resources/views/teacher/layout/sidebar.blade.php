@@ -19,8 +19,8 @@
         <ul class="nav flex-column">
             <li class="nav-item ">
                 <a href="{{route('getListCours')}}" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-hand-holding-usd"></span></span>
-                    <span>Course</span>
+                    <span class="sidebar-icon"><span class="fas fa-book"></span></span>
+                    <span>Cours</span>
                 </a>
             </li>
             <li class="nav-item ">
@@ -30,14 +30,8 @@
                 </a>
             </li>
 
-            <li class="nav-item ">
-                <a href="{{route('manager.request')}}" class="nav-link">
-                    <span>Déconnexion</span>
-                </a>
-            </li>
-
 {{--            <li class="nav-item ">--}}
-{{--                <a href="{{route('logout')}}" class="nav-link">--}}
+{{--                <a href="{{route('manager.request')}}" class="nav-link">--}}
 {{--                    <span>Déconnexion</span>--}}
 {{--                </a>--}}
 {{--            </li>--}}
