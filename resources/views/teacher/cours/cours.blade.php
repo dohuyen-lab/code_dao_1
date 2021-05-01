@@ -54,7 +54,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Serial</th>
+                <th>N°</th>
                 <th>Intitule</th>
                 <th>Formation</th>
                 <th>Date Debut</th>
