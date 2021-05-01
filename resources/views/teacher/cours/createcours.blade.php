@@ -15,7 +15,7 @@
         </div>
             <form method="POST" action="{{$status == 0? route('storeCours') : route('updateCours')}}">
                 @csrf
-                <input type="hidden" value="{{$cour->id}}" name="id">
+                <input type="hidden" value="{{$status == 1?$cour->id:''}}" name="id">
                 <section class="fdb-block">
                     <div class="container">
                         <div class="row justify-content-center">

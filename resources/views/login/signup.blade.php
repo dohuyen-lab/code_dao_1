@@ -68,8 +68,8 @@
                         <div class="row mt-4">
                             <div class="col">
 
-                                <select name="formation" id="formation" class="form-control" required="required">
-                                    <option value="" selected>None</option>
+                                <select name="formation" id="formation" class="form-control">
+                                    <option value="1" selected>Enseignant</option>
                                     @foreach($formations as $key => $f)
                                         <option value="{{$f->id}}">{{$f->intitule}}</option>
                                     @endforeach

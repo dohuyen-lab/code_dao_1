@@ -84,6 +84,7 @@ class BaseController extends Controller
         $login = $request['login'];
         $mdp = $request['mdp'];
         $formation_id = $request['formation'];
+        $type = $formation_id == 1? 'enseignant': null;
 
         $mdp = Hash::make($mdp);
 
@@ -93,6 +94,7 @@ class BaseController extends Controller
                 'prenom' => $prenom,
                 'login' => $login,
                 'mdp' => $mdp,
+                'type' => $type,
                 'formation_id' => $formation_id
             ]);
         return redirect()->route('login');
