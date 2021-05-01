@@ -41,6 +41,7 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     //cours -> lớp học
     Route::get('cours', [CourController::class, 'getAll'])->name('manager.cours');
     Route::get('/cours/store', [CourController::class, 'getStore'])->name('manager.store.cours');
+    Route::post('/cours/store', [CourController::class, 'storeByManager'])->name('manager.store.post');
     Route::get('/cours/edit/{id}', [CourController::class, 'getCourse'])->name('manager.edit.course');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('manager.delete.course');
 
@@ -87,4 +88,6 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
 
     Route::get('/cours/edit/{id}', [CourController::class, 'getCourse'])->name('editCours');
     Route::post('/cours/edit', [CourController::class, 'editCours'])->name('updateCours');
+
+    Route::get('/cours/store/get', [ CourController::class, 'getCourseByFormationID'])->name('teacher.store.getcours');
 });
