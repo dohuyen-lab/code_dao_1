@@ -14,7 +14,9 @@
                 <form action="{{route('manager.search.course')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
                     <div class="input-group input-group-merge search-bar">
                         <input type="text" class="form-control" id="topbarInputIconLeft" name="search" placeholder="Recherche" aria-label="Search" aria-describedby="topbar-addon">
-                        <input type="submit" class="btn btn-success form-control" value="Search" style="width:70px;">
+                        <button type="submit" class="btn btn-success form-control" style="width:70px;">
+                            <span class="fas fa-search"></span>
+                        </button>
                     </div>
                 </form>
         </div>

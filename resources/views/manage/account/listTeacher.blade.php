@@ -9,7 +9,9 @@
                 <form action="{{route('manager.search.teacher')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
                     <div class="input-group input-group-merge search-bar">
                         <input type="text" class="form-control" name="search" id="topbarInputIconLeft" placeholder="Recherche" aria-label="Search" aria-describedby="topbar-addon">
-                        <input type="submit" class="btn btn-success form-control" value="Search" style="width:70px;">
+                        <button type="submit" class="btn btn-success form-control" style="width:70px;">
+                            <span class="fas fa-search"></span>
+                        </button>
                     </div>
                 </form>
         </div>
@@ -27,7 +29,6 @@
                         <th>Prénom</th>
                         <th>Nom</th>
                         <th>Identifiant</th>
-                        <th>cours</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -40,7 +41,6 @@
                         <td>{{$t->nom}}</td>
                         <td>{{$t->prenom}}</td>
                         <td>{{$t->login}}</td>
-                        <td>{{$t->intitule}}</td>
                         <td>
 
                             <button class="btn btn-danger" type="submit">Supprimer</button>

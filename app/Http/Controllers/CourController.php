@@ -91,14 +91,16 @@ class CourController extends Controller
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
                         ->join('plannings','cours.id','=','plannings.cours_id')
                         ->join('formations','cours.formation_id','=','formations.id')
-                        ->get();
+                        ->orderBy('cours.intitule', 'asc')
+                        ->paginate(15);
         } else{
             $list = DB::table('cours')
                         ->select('cours.id','cours.intitule','plannings.date_debut','plannings.date_fin', 'formations.intitule as Fintitule')
                         ->join('plannings','cours.id','=','plannings.cours_id')
                         ->join('formations','cours.formation_id','=','formations.id')
                         ->where('cours.user_id', '=', $user_id)
-                        ->get();
+                        ->orderBy('cours.intitule', 'asc')
+                        ->paginate(15);
         }
 
         if ($user[0]->type == 'admin') {
