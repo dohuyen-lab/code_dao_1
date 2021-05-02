@@ -23,6 +23,19 @@
                     <span>Cours</span>
                 </a>
             </li>
+            <li class="nav-item ">
+                <a href="{{route('getInformation')}}" class="nav-link">
+                    <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
+                    <span>Informations</span>
+                </a>
+            </li>
+
+{{--            <li class="nav-item ">--}}
+{{--                <a href="{{route('manager.request')}}" class="nav-link">--}}
+{{--                    <span>Déconnexion</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+
         </ul>
     </div>
 </nav>

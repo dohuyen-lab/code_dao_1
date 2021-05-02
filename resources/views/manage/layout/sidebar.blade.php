@@ -31,14 +31,6 @@
                         <li class="nav-item "><a class="nav-link" href="{{route('manager.register')}}"><span>Créer d’utilisateur</span></a></li>
                     </ul>
                 </div>
-        </li>
-            <li class="nav-item">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#submenu-pages">
-                <a href="{{route('formations.index')}}" class="nav-link">
-                    <span>
-                        Gestion des formation
-                    </span>
-                </a>
             </li>
             <li class="nav-item ">
                 <a href="{{ route('manager.cours')}}" class="nav-link">
@@ -47,7 +39,13 @@
                     </span>
                 </a>
             </li>
-
+            <li class="nav-item ">
+                <a href="{{ route('formations.index')}}" class="nav-link">
+                    <span>
+                       Gestion des formation
+                    </span>
+                </a>
+            </li>
             <li class="nav-item ">
                 <a href="{{route('manager.request')}}" class="nav-link">
                     <span>Demande</span>

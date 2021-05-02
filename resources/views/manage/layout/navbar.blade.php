@@ -17,20 +17,14 @@
                     <a class="nav-link pt-1 px-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="media d-flex align-items-center">
                             <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
-                                <span class="mb-0 font-small font-weight-bold">
-                                        @if (Session::has('user'))
-                                        <?php
-                                            $user = Session::get('user');
-                                            echo $user[0][0]->nom ." ".$user[0][0]->prenom
-                                        ?>
-                                        @endif
-                                </span>
+                                <a class="dropdown-item font-weight-bold" href="{{route('logout')}}"><span class="fas fa-sign-out-alt text-danger"></span>Déconnexion</a>
                             </div>
                         </div>
                     </a>
-                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
-                        <a class="dropdown-item font-weight-bold" href="{{route('logout')}}"><span class="fas fa-sign-out-alt text-danger"></span>Déconnexion</a>
-                    </div>
+{{--                    <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">--}}
+{{--                        <a class="dropdown-item font-weight-bold" href="{{route('logout')}}"><span class="fas fa-sign-out-alt text-danger"></span>Déconnexion</a>--}}
+{{--                    </div>--}}
+
                 </li>
             </ul>
         </div>
