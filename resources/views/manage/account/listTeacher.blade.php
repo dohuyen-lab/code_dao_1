@@ -90,11 +90,6 @@
                                 <input type="text" name="prenom" class="form-control" value="">
                                 <small class="error form-text text-danger"></small>
                             </div>
-                            <div class="form-group">
-                                <label>Formation</label>
-                                <select class="form-control" name="formation_id">
-                                </select>
-                            </div>
                             <div class="form-group d-flex mt-2">
                                 <button type="submit" id="btn_submit" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Mettre à jour</button>&nbsp;
                                 <button class="btn btn-danger" data-dismiss="modal">Fermer</button>
@@ -117,12 +112,6 @@
                     $('#idUser').val(data['data']['user'].id);
                     $("#editInformationModal input[name=nom]").val(data['data'].user.nom);
                     $("#editInformationModal input[name=prenom]").val(data['data'].user.prenom);
-                    $("select[name='formation_id']").html('');
-                    $.each(data['data'].formations, function(key, value){
-                        $("select[name='formation_id']").append(
-                            "<option value=" + value.id + ">" + value.intitule + "</option>"
-                        );
-                    });
                     $("#editInformationModal").modal('show');
                 },
                 error: function(error) {

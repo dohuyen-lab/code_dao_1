@@ -111,7 +111,7 @@ class InformationController extends Controller
         $user_id = $req->idUser;
         $nom = $req->nom;
         $prenom = $req->prenom;
-        $formation_id = $req->formation_id;
+        $formation_id = $req->formation_id ? $req->formation_id : 1;
 
         DB::table('users')
         ->where('id', '=', $user_id)
