@@ -35,8 +35,6 @@
                 </thead>
                 <tbody>
                 @foreach($student as $key => $s)
-                    <form action="{{url('/manager/delete/'.$s->id)}}" method="POST" >
-                        @csrf
                     <tr>
                         <th scope="row">{{$key + 1}}</th>
                         <td>{{$s->nom}}</td>
@@ -44,14 +42,115 @@
                         <td>{{$s->login}}</td>
                         <td>{{$s->intitule}}</td>
                         <td>
-                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                            <div class="d-flex">
+                                <form>
+                                    <button onclick="editInformation({{$s->id}})" class="btn btn-success" type="button">Éditer</button>
+                                </form>&nbsp;&nbsp;
+                                <form action="{{url('/manager/delete/'.$s->id)}}" method="POST" >
+                                    @csrf
+                                    <button class="btn btn-danger" type="submit">Supprimer</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     </form>
                 @endforeach
                 </tbody>
             </table>
+            <div class="modal fade" id="editInformationModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
 
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modifier le profil</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <form id="edit_information_form" action="{{route('manager.post.edit')}}" method="POST"  enctype="multipart/form-data">
+                                @csrf
+                                <input hidden name="idUser" id="idUser" type="text">
+                                <div class="form-group">
+                                    <label>Prénom</label>
+                                    <input type="text" name="nom" class="form-control" value="">
+                                    <small class="error form-text text-danger"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom</label>
+                                    <input type="text" name="prenom" class="form-control" value="">
+                                    <small class="error form-text text-danger"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Formation</label>
+                                    <select class="form-control" name="formation_id" onchange="setSelectCours(this.value)">
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cours</label>
+                                    <select class="form-control" name="cours_id" id="cours_id" disabled>
+                                        <option value= "0" selected >Veuillez choisir un cours</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Mettre à jour</button>
+                            <button class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
+        <script type="text/javascript">
+            function editInformation(id){
+                event.preventDefault();
+                $.ajax({
+                    type: 'GET',
+                    url: "{{route('manager.get.edit')}}",
+                    data: {id: id},
+                    success: function(data) {
+                        console.log(data);
+                        $('#idUser').val(data.data.id);
+                        $("#editInformationModal input[name=nom]").val(data['data'].user.nom);
+                        $("#editInformationModal input[name=prenom]").val(data['data'].user.prenom);
+                        $("select[name='formation_id']").html('');
+                        $.each(data['data'].formations, function(key, value){
+                            $("select[name='formation_id']").append(
+                                "<option value=" + value.id + ">" + value.intitule + "</option>"
+                            );
+                        });
+                        $("#editInformationModal").modal('show');
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
 
+            function setSelectCours(id) {
+                $.ajax({
+                    url: `{{ route('teacher.store.getcours') }}`,
+                    method: 'get',
+                    data: {id: id},
+                    success: function(data) {
+                        console.log(data);
+                        $("select[name='cours_id']").html('');
+                        $.each(data, function(key, value){
+                            $("select[name='cours_id']").append(
+                                "<option value=" + value.id + ">" + value.intitule + "</option>"
+                            );
+                        });
+                        $("#cours_id").prop("disabled", false);
+                    },
+                    error: function(error) {
+                        var errors = error.responseJSON;
+                        console.log(errors.errors);
+                    }
+                });
+            }
+        </script>
 @endsection

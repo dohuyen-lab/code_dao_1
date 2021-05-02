@@ -87,6 +87,14 @@ class FormationController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $check = DB::table('formations')
+        ->where('id', $id)
+        ->update(['intitule' => $request->intitule]);
+        if ($check == 0) {
+            return redirect()->back()->with(['message' => 'Edit False']);
+        }
+
+        return redirect()->back();
     }
 
     /**

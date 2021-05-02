@@ -65,7 +65,7 @@ class InformationController extends Controller
         if ($request->newpassword != $request->password_confirmation) {
             return redirect()->back()->with(['message'=>'Le mot de passe ne correspond pas']);
         }
-        
+
         if (Hash::check($request->password, $user->mdp)) {
             DB::table('users')
             ->where('id', '=', $id)
@@ -76,5 +76,24 @@ class InformationController extends Controller
             return response()->json(array('error' => $error), 400);
         }
         return redirect()->back();
+    }
+
+    public function getInfoUserById() {
+        if (isset($_GET['id'])) {
+            $data = array();
+            $id = $_GET['id'];
+
+            $user = DB::table('users')
+            ->select('nom', 'prenom')
+            ->where('id', '=', $id)
+            ->first();
+
+            $formations = DB::table('formations')->get();
+            $course = DB::table('cours')->get();
+            $data['user'] = $user;
+            $data['course'] = $course;
+            $data['formations'] = $formations;
+            return response()->json(['error' => false, 'data' => $data], 200);
+        }
     }
 }

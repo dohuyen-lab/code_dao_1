@@ -36,7 +36,7 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
 
     //formations -> khoá học.
     Route::resource('formations', 'FormationController')->except([
-        'create', 'show', 'edit', 'update'
+        'create', 'show', 'edit',
     ]);
     //cours -> lớp học
     Route::get('cours', [CourController::class, 'getAll'])->name('manager.cours');
@@ -53,6 +53,9 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/student', [ManageController::class, 'getListStudent'])->name('manager.student');
     // delete user
     Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
+    // edit user
+    Route::get('/student/edit', [InformationController::class, 'getInfoUserById'])->name('manager.get.edit');
+    Route::post('/student/edit', [InformationController::class, 'postInfoUserById'])->name('manager.post.edit');
 
     // search
     Route::get('/search/formation', [ManageController::class, 'searchFormation'])->name('manager.search.formation');
