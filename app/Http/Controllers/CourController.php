@@ -258,11 +258,16 @@ class CourController extends Controller
         $user_id = $user[0][0]->id;
 
         $id = $_GET['id'];
-
-        $course = DB::table('cours')
+        if ($user[0][0]->type == 'admin') {
+            $course = DB::table('cours')
+            ->where('formation_id', '=', $id)
+            ->get();
+        } else {
+            $course = DB::table('cours')
             ->where('user_id', '=', $user_id)
             ->where('formation_id', '=', $id)
             ->get();
+        }
         return response()->json($course);
     }
 }

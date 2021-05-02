@@ -22,7 +22,7 @@
                             <div class="d-flex flex-column align-items-center text-center">
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                 <div class="md-3">
-                                    <h4>{{$formation->nom}} {{$formation->prenom}}</h4>
+                                    <h4 id="name_user">{{$formation->prenom}} {{$formation->nom}}</h4>
                                     <p class="text-secondary mb-1">
                                     </p>
                                     <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Chỉnh sửa thông tin</button> -->
@@ -41,7 +41,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Prénom </h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div id="nom_div" class="col-sm-9 text-secondary">
                                     {{$formation->nom}}
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Nom </h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
+                                <div id="prenom_div" class="col-sm-9 text-secondary">
                                     {{$formation->prenom}}
                                 </div>
                             </div>
@@ -133,17 +133,17 @@
                         <input hidden name="idUser" id="idUser" value="{{$formation->id}}" type="text">
                         <div class="form-group">
                             <label>Mot de passe actuel</label>
-                            <input type="password" name="password" class="form-control" value="">
+                            <input type="password" name="password" class="form-control" value="" required>
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group">
                             <label>Nouveau mot de passe</label>
-                            <input type="password" name="newpassword" class="form-control" value="">
+                            <input type="password" name="newpassword" class="form-control" value="" required>
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group">
                             <label>Confirmez le mot de passe</label>
-                            <input type="password" name="password_confirmation" class="form-control" value="">
+                            <input type="password" name="password_confirmation" class="form-control" value="" required>
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group mt-5">
@@ -179,11 +179,11 @@
     function ChangePass(){
         $("#editPassword").modal('show');
     }
+
     function submitEdit(){
         event.preventDefault();
-
         var data = new FormData($("#editInformationModal form")[0]);
-        console.log(data);
+
         $.ajax({
             url: "{{route('postEditInformation')}}",
             method: 'post',
@@ -192,10 +192,11 @@
             processData: false,
             success: function(data) {
                 console.log(data);
+                $("#name_user").text(`${data['data'].prenom} ${data['data'].nom}`);
+                $("#prenom_div").text(`${data['data'].prenom}`);
+                $("#nom_div").text(`${data['data'].nom}`);
                 $('#editInformationModal').modal('hide');
-                toastr.success('Sửa thành công!')
-                window.location.reload().delay(500);
-
+                // window.location.reload().delay(500);
             },
             error: function(error) {
                 var errors = error.responseJSON;
@@ -208,6 +209,7 @@
             }
         });
     }
+
     function submitChangePass(){
         event.preventDefault();
 
@@ -221,19 +223,16 @@
             processData: false,
             success: function(data) {
                 console.log(data);
+                window.location.reload().delay(500);
                 $('#editPassword').modal('hide');
                 toastr.success('Sửa thành công!')
-                // window.location.reload().delay(500);
-
             },
             error: function(error) {
                 var errors = error.responseJSON;
                 console.log(errors.errors);
                 $.each(errors.errors, function(i, val) {
                     $("#editPassword input[name=" + i + "]").siblings('.error').text(val[0]);
-
                 })
-
             }
         });
     }

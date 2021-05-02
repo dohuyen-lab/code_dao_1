@@ -12,8 +12,8 @@
             </div>
             <div class="collapse-close d-md-none">
                 <a href="#sidebarMenu" class="fas fa-times" data-toggle="collapse"
-                   data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
-                   aria-label="Toggle navigation"></a>
+                data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="true"
+                aria-label="Toggle navigation"></a>
             </div>
         </div>
         <ul class="nav flex-column">
@@ -24,18 +24,11 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="{{route('getInformation')}}" class="nav-link">
+                <a href="{{route('teacher.getInformation')}}" class="nav-link">
                     <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
                     <span>Informations</span>
                 </a>
             </li>
-
-{{--            <li class="nav-item ">--}}
-{{--                <a href="{{route('manager.request')}}" class="nav-link">--}}
-{{--                    <span>Déconnexion</span>--}}
-{{--                </a>--}}
-{{--            </li>--}}
-
         </ul>
     </div>
 </nav>

@@ -20,7 +20,12 @@ class InformationController extends Controller
             ->first();
         $data =[];
         $data['formation'] = $formation;
-        return view('student.account.information', $data);
+        if ($user[0][0]->type == 'etudiant') {
+            return view('student.account.information', $data);
+        } else if ($user[0][0]->type == 'enseignant') {
+            return view('teacher.account.information', $data);
+        }
+
     }
     public function editInformation(){
         $user = Session::get('user');
@@ -44,7 +49,9 @@ class InformationController extends Controller
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
         $user->update();
-        return($request);
+        $user = ['nom' => $request->nom, 'prenom' => $request->prenom];
+
+        return response()->json(['error' => false, 'data' => $user], 200);
     }
 
     public function postChangePass(Request $request)
@@ -65,7 +72,7 @@ class InformationController extends Controller
         if ($request->newpassword != $request->password_confirmation) {
             return redirect()->back()->with(['message'=>'Le mot de passe ne correspond pas']);
         }
-        
+
         if (Hash::check($request->password, $user->mdp)) {
             DB::table('users')
             ->where('id', '=', $id)
@@ -76,5 +83,44 @@ class InformationController extends Controller
             return response()->json(array('error' => $error), 400);
         }
         return redirect()->back();
+    }
+
+    public function getInfoUserById() {
+        if (isset($_GET['id'])) {
+            $data = array();
+            $id = $_GET['id'];
+
+            $user = DB::table('users')
+            ->select('nom', 'prenom', 'id')
+            ->where('id', '=', $id)
+            ->first();
+
+            $formations = DB::table('formations')
+                            ->where('id', '>', 1)
+                            ->where('deleted_at', '<>', 1)
+                            ->get();
+
+            $data['user'] = $user;
+            $data['formations'] = $formations;
+            return response()->json(['error' => false, 'data' => $data], 200);
+        }
+    }
+
+    public function postInfoUserById(Request $req) {
+
+        $user_id = $req->idUser;
+        $nom = $req->nom;
+        $prenom = $req->prenom;
+        $formation_id = $req->formation_id;
+
+        DB::table('users')
+        ->where('id', '=', $user_id)
+        ->update([
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'formation_id' => $formation_id
+        ]);
+
+        return redirect()->back()->with(['message'=>'Mise à jour réussie !!']);
     }
 }

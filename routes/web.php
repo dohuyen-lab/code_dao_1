@@ -36,7 +36,7 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
 
     //formations -> khoá học.
     Route::resource('formations', 'FormationController')->except([
-        'create', 'show', 'edit', 'update'
+        'create', 'show', 'edit',
     ]);
     //cours -> lớp học
     Route::get('cours', [CourController::class, 'getAll'])->name('manager.cours');
@@ -53,9 +53,12 @@ Route::group(['prefix'=>'manager', 'middleware'=>'authmdw'], function () { //, '
     Route::get('/student', [ManageController::class, 'getListStudent'])->name('manager.student');
     // delete user
     Route::post('/delete/{id}', [ManageController::class, 'postdeleteAccount'])->name('postdeleteAccount');
+    // edit user
+    Route::get('/student/edit', [InformationController::class, 'getInfoUserById'])->name('manager.get.edit');
+    Route::post('/student/edit', [InformationController::class, 'postInfoUserById'])->name('manager.post.edit');
 
     // search
-    Route::get('/search/formation', [ManageController::class, 'searchFormation'])->name('manager.search.formation');
+    Route::get('/search/formation', [ManageController::class, 'searchFormation'])->name('search.manager.formation');
     Route::get('/search/course', [ManageController::class, 'searchCourse'])->name('manager.search.course');
     Route::get('/search/student', [ManageController::class, 'searchStudent'])->name('manager.search.student');
     Route::get('/search/teacher', [ManageController::class, 'searchTeacher'])->name('manager.search.teacher');
@@ -79,7 +82,7 @@ Route::group(['prefix'=>'student'], function () { //, 'middleware'=>'auth'
 
 Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, 'middleware'=>'auth'
     Route::get('/', [TeacherController::class, 'index'])->name('teacher.index');
-//    Route::get('/calendar', [TeacherController::class, 'getTeacherCalendar'])->name('getTeacherCalendar');
+
     Route::get('/cours', [CourController::class, 'getAll'])->name('getListCours');
     Route::get('/cours/eek', [CourController::class, 'getAllWeek'])->name('getListCoursWeek');
     Route::post('/cours/delete', [CourController::class, 'delete'])->name('deleteCours');
@@ -88,6 +91,11 @@ Route::group(['prefix'=>'teacher', 'middleware'=>'authmdw'], function () { //, '
 
     Route::get('/cours/edit/{id}', [CourController::class, 'getCourse'])->name('editCours');
     Route::post('/cours/edit', [CourController::class, 'editCours'])->name('updateCours');
+
+    Route::get('/information', [InformationController::class, 'getInformation'])->name('teacher.getInformation');
+    Route::get('/editinformation', [InformationController::class, 'editInformation'])->name('teacher.editInformation');
+    Route::post('/editinformation', [InformationController::class, 'postEditInformation'])->name('teacher.postEditInformation');
+    Route::post('/changepass', [InformationController::class, 'postChangePass'])->name('teacher.postChangePass');
 
     Route::get('/cours/store/get', [ CourController::class, 'getCourseByFormationID'])->name('teacher.store.getcours');
 });

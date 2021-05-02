@@ -21,21 +21,32 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center" style="padding-top: 0 !important;">
                 <div class="col-6 col-md-6 col-lg-7 col-xl-5 text-center">
-                <form action="{{route('formations.store')}}" method="POST">
-                    @csrf
+                    <form action="{{route('formations.store')}}" method="POST">
+                        @csrf
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="col mt-4 align-self-center">
                                 <input type="text" class="form-control" name="intitule" placeholder="Matière" required>
                             </div>
                             <div class="col mt-4">
                                 <button class="btn btn-outline-secondary" type="submit">Soumission</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-
-
+                    </form>
                 </div>
-
+                <div class="col-6 col-md-6 col-lg-7 col-xl-5 text-center">
+                    <form id="form_edit" action="" method="POST">
+                        @csrf
+                        <input name="_method" type="hidden" value="PUT">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+                            <div class="col mt-4 align-self-center">
+                                <input type="text" class="form-control" id="edit_text" name="intitule" placeholder="Éditer ..." required>
+                            </div>
+                            <div class="col mt-4">
+                                <button class="btn btn-outline-success" type="submit">Éditer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -60,13 +71,18 @@
                                 <th scope="row">{{$key + 1}}</th>
                                 <td>{{$coure->intitule}}</td>
                                 <td>
-                                    <form action="{{url('manager/formations/'.$coure->id)}}" method="POST" class="signin-form" enctype="multipart/form-data">
-                                        <input type="hidden" name="_method" value="delete" />
-                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <button class="btn btn-danger" type="submit">
-                                            Supprimer
-                                        </button>
-                                    </form>
+                                    <div class="d-flex">
+                                        <button class="btn btn-success" type="button" onclick="setEdit(`{{$coure->intitule}}`, {{$coure->id}})">
+                                            Éditer
+                                        </button>&nbsp;&nbsp;
+                                        <form action="{{url('manager/formations/'.$coure->id)}}" method="POST" class="signin-form" enctype="multipart/form-data">
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button class="btn btn-danger" type="submit">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -75,6 +91,11 @@
             </table>
             {{$coures->links()}}
         </div>
-
-
+        <script type="text/javascript">
+            function setEdit(text, id) {
+                $("input[id='edit_text']").val(text);
+                route = `{{route('formations.store')}}/${id}`;
+                $("#form_edit").attr('action', route);
+            }
+        </script>
 @endsection
