@@ -186,9 +186,8 @@ class ManageController extends Controller
             $text = $_GET['search'];
 
             $student = DB::table('users')
-            ->where('users.type', 'etudiant')
-            ->where('users.nom', 'like', '%'.$text.'%')
-            ->orWhere('users.prenom', 'like', '%'.$text.'%')
+            ->where('users.type', 'like', '%etudiant%')
+            ->where('users.prenom', 'like', '%'.$text.'%')
             ->join('formations','users.formation_id','=','formations.id')
             ->select('users.*','formations.intitule')
             ->get();
@@ -204,8 +203,7 @@ class ManageController extends Controller
 
             $teacher = DB::table('users')
             ->where('users.type', '=', 'enseignant')
-            ->where('users.nom', 'like', '%'.$text.'%')
-            ->orWhere('users.prenom', 'like', '%'.$text.'%')
+            ->where('users.prenom', 'like', '%'.$text.'%')
             ->join('formations','users.formation_id','=','formations.id')
             ->select('users.*','formations.intitule')
             ->get();

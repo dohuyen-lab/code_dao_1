@@ -25,10 +25,10 @@
                         @csrf
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
                             <div class="col mt-4 align-self-center">
-                                <input type="text" class="form-control" name="intitule" placeholder="Matière" required>
+                                <input type="text" class="form-control" name="intitule" placeholder="Saisir une formation" required>
                             </div>
                             <div class="col mt-4">
-                                <button class="btn btn-outline-secondary" type="submit">Soumission</button>
+                                <button class="btn btn-outline-secondary" type="submit">Créer</button>
                             </div>
                         </div>
                     </form>

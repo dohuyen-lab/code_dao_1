@@ -26,14 +26,17 @@ class StudentController extends Controller
     }
     public function getListCoursStudent(){
         $user = Session::get('user');
-        $user_id = $user[0][0]->id;
+        $formation_id = $user[0][0]->formation_id;
         $data = [];
-        $cours = DB::table('cours_users')
-            ->where('cours_users.user_id',$user_id)
-            ->join('cours','cours.id','=','cours_users.cours_id')
-            ->select('cours.intitule')
+        $cours = DB::table('cours')
+            ->where('cours.formation_id',$formation_id)
+            ->join('formations','cours.formation_id','=','formations.id')
+            ->join('plannings', 'cours.id','=','plannings.cours_id')
+            ->join('users', 'cours.user_id','=', 'users.id')
+            ->select('cours.*', 'users.prenom', 'users.nom', 'plannings.date_debut', 'plannings.date_fin')
             ->get();
         $data['cours'] = $cours;
+
         return view('student.cours.listcours', $data);
     }
     public function postdeleteCours($id){

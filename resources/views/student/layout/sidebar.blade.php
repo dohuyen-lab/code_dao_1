@@ -17,26 +17,25 @@
             </div>
         </div>
         <ul class="nav flex-column">
-            <li class="nav-item  active ">
-                <a href="{{route('getStudentCalendar')}}" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
-                    <span>Calendrier</span>
-                </a>
-            </li>
             <li class="nav-item ">
                 <a href="{{route('getListCoursStudent')}}" class="nav-link">
                     <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
                     <span>Cours</span>
                 </a>
             </li>
-            
+            <li class="nav-item">
+                <a href="{{route('getStudentCalendar')}}" class="nav-link">
+                    <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
+                    <span>Calendrier</span>
+                </a>
+            </li>
             <li class="nav-item ">
                 <a href="{{route('getInformation')}}" class="nav-link">
                     <span class="sidebar-icon"><span class="far fa-envelope"></span></span>
                     <span>Informations</span>
                 </a>
             </li>
-            
+
         </ul>
     </div>
 </nav>
