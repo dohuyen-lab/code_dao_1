@@ -6,7 +6,7 @@
         <div class="d-block mb-4 mb-md-0">
 
             <h2 class="h4">Liste des formations</h2>
-                <form action="{{route('manager.search.formation')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
+                <form action="{{route('search.manager.formation')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
                     <div class="input-group input-group-merge search-bar">
                         <input type="text" class="form-control" name="search" id="topbarInputIconLeft" placeholder="Recherche" aria-label="Search" aria-describedby="topbar-addon">
                         <button type="submit" class="btn btn-success form-control" style="width:70px;">
@@ -42,7 +42,7 @@
                                 <input type="text" class="form-control" id="edit_text" name="intitule" placeholder="Éditer ..." required>
                             </div>
                             <div class="col mt-4">
-                                <button class="btn btn-outline-success" type="submit">Éditer</button>
+                                <button id="btn_edit" class="btn btn-outline-success" type="submit" disabled>Éditer</button>
                             </div>
                         </div>
                     </form>
@@ -95,6 +95,7 @@
             function setEdit(text, id) {
                 $("input[id='edit_text']").val(text);
                 route = `{{route('formations.store')}}/${id}`;
+                $("#btn_edit").prop('disabled', false);
                 $("#form_edit").attr('action', route);
             }
         </script>
