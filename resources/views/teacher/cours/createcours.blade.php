@@ -23,22 +23,13 @@
                             <div class="col-12 col-md-8 col-lg-8 col-xl-6">
                                 <div class="row align-items-center">
                                     <div class="col mt-4">
-                                        <select
-                                            name="formation_id" id="formation_id"
-                                            class="form-control" required="required" {{$status == 0? '': 'disabled'}}
-                                            onchange="setSelectCours(this.value)"
-                                        >
-                                            <option value="" selected>{{$status == 1? $formations[0]->intitule : "Veuillez choisir la formation"}}</option>
-                                            @foreach($formations as $key => $f)
-                                                <option value="{{ $f->id }}">{{ $f->intitule }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center">
-                                    <div class="col mt-4">
-                                            <select name="cours_id" id="cours_id" class="form-control" required="required" disabled>
+                                            <select name="cours_id" id="cours_id" class="form-control" required="required">
                                                 <option value= "" selected >{{$status == 1? $cour->intitule : "Veuillez choisir un cours"}}</option>
+                                                @if (isset($course))
+                                                    @foreach ($course as $cour)
+                                                        <option value="{{ $cour->id }}">{{ $cour->intitule }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                     </div>
                                 </div>
@@ -76,27 +67,7 @@
         </div>
     </section>
     <script type="text/javascript">
-        function setSelectCours(id) {
-            $.ajax({
-            url: `{{ route('teacher.store.getcours') }}`,
-            method: 'get',
-            data: {id: id},
-            success: function(data) {
-                console.log(data);
-                $("select[name='cours_id']").html('');
-                $.each(data, function(key, value){
-                    $("select[name='cours_id']").append(
-                        "<option value=" + value.id + ">" + value.intitule + "</option>"
-                    );
-                });
-                $("#cours_id").prop("disabled", false);
-            },
-            error: function(error) {
-                var errors = error.responseJSON;
-                console.log(errors.errors);
-            }
-        });
-        }
+
     </script>
 @endsection
 

@@ -35,7 +35,7 @@
             <li class="nav-item ">
                 <a href="{{ route('formations.index')}}" class="nav-link">
                     <span>
-                        Gestion des formation
+                        Gestion des formations
                     </span>
                 </a>
             </li>

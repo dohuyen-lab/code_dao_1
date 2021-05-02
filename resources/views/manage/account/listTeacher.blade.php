@@ -7,7 +7,7 @@
         <h2 class="h4">Liste des enseignants</h2>
         <form action="{{route('manager.search.teacher')}}" method="get" class="navbar-search form-inline" id="navbar-search-main">
             <div class="input-group input-group-merge search-bar">
-                <input type="text" class="form-control" name="search" id="topbarInputIconLeft" placeholder="Recherche" aria-label="Search" aria-describedby="topbar-addon">
+                <input type="text" class="form-control" name="search" id="topbarInputIconLeft" placeholder="Recherche" aria-label="Search" aria-describedby="topbar-addon" required>
                 <button type="submit" class="btn btn-success form-control" style="width:70px;">
                     <span class="fas fa-search"></span>
                 </button>
@@ -48,8 +48,8 @@
             @foreach($teacher as $key => $t)
                 <tr>
                     <th scope="row">{{$key + 1}}</th>
-                    <td>{{$t->nom}}</td>
                     <td>{{$t->prenom}}</td>
+                    <td>{{$t->nom}}</td>
                     <td>{{$t->login}}</td>
                     <td>
                         <div class="d-flex">

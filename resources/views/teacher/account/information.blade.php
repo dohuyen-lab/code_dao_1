@@ -142,13 +142,13 @@
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group">
-                            <label>Confirmez le mot de passe</label>
+                            <label> Confirmez le nouveau mot de passe </label>
                             <input type="password" name="password_confirmation" class="form-control" value="" required>
                             <small class="error form-text text-danger"></small>
                         </div>
                         <div class="form-group mt-5">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Cập nhật</button>
-                            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Mettre à jour</button>
+                            <button class="btn btn-danger" data-dismiss="modal">Fermer</button>
                         </div>
                     </form>
                 </div>

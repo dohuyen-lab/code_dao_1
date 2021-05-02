@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
             <h2 class="h4"> Liste de cours</h2>
-            
+
         </div>
     </div>
     {{--    <div class="table-settings mb-4">--}}
@@ -40,10 +40,10 @@
             <thead>
             <tr>
                 <th>N°</th>
-                <th>Enseignement</th>
+                <th>Cours</th>
+                <th>Enseignant</th>
                 <th>Date_début</th>
                 <th>Date_fin</th>
-
             </tr>
             </thead>
             <tbody>
@@ -51,6 +51,7 @@
                 <tr>
                     <th scope="row">{{$key + 1}}</th>
                     <td>{{$c->intitule}}</td>
+                    <td>{{$c->prenom}} {{$c->nom}}</td>
                     <td>{{$c->date_debut}}</td>
                     <td>{{$c->date_fin}}</td>
                 </tr>

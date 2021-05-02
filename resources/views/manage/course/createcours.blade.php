@@ -18,14 +18,13 @@
                 <section class="fdb-block">
                     <div class="container">
                         <div class="row justify-content-center">
-
                             <div class="col-12 col-md-8 col-lg-8 col-xl-6">
                                 <div class="row align-items-center">
                                     <div class="col mt-4">
                                         @if($status == 0)
                                             <input type="text" class="form-control" placeholder="Nom" name="intitule" id="intitule">
                                         @else
-                                            <label>{{$cour->intitule}}</label>
+                                            <input type="text" class="form-control" value="{{$cour->intitule}}" placeholder="Nom" name="intitule" id="intitule">
                                             <input name="id" value="{{$cour->id}}" hidden>
                                         @endif
                                     </div>
@@ -33,7 +32,7 @@
                                 <div class="row align-items-center">
                                             <div class="col mt-4">
 
-                                                    <select name="user_id" id="user_id" class="form-control" required="required" {{$status == 0? '': 'disabled'}}>
+                                                    <select name="user_id" id="user_id" class="form-control" required="required" >
                                                         <option value= "" selected >Liste des enseignants</option>
                                                         @foreach($teachers as $key => $t)
                                                             <option value="{{ $t->id }}">{{ $t->nom.' '.$t->prenom }}</option>
@@ -45,7 +44,7 @@
                                             <div class="row align-items-center">
                                                 <div class="col mt-4">
 
-                                                    <select name="formation_id" id="formation_id" class="form-control" required="required" {{$status == 0? '': 'disabled'}}>
+                                                    <select name="formation_id" id="formation_id" class="form-control" required="required" >
                                                         @foreach($formations as $key => $f)
                                                             <option value="{{ $f->id }}">{{ $f->intitule }}</option>
                                                         @endforeach
