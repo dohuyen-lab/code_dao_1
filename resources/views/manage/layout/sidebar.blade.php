@@ -33,16 +33,16 @@
                 </div>
             </li>
             <li class="nav-item ">
-                <a href="{{ route('manager.cours')}}" class="nav-link">
+                <a href="{{ route('formations.index')}}" class="nav-link">
                     <span>
-                        Gestion des cours
+                        Gestion des formation
                     </span>
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="{{ route('formations.index')}}" class="nav-link">
+                <a href="{{ route('manager.cours')}}" class="nav-link">
                     <span>
-                       Gestion des formation
+                        Gestion des cours
                     </span>
                 </a>
             </li>
