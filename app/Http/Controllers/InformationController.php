@@ -121,6 +121,6 @@ class InformationController extends Controller
             'formation_id' => $formation_id
         ]);
 
-        return redirect()->back()->with(['message'=>'Mise à jour réussie !!']);
+        return redirect()->back()->with(['message'=>'Mise à jour réussie!!']);
     }
 }
