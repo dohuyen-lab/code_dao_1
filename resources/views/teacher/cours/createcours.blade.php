@@ -19,18 +19,36 @@
                 <section class="fdb-block">
                     <div class="container">
                         <div class="row justify-content-center">
-
                             <div class="col-12 col-md-8 col-lg-8 col-xl-6">
                                 <div class="row align-items-center">
                                     <div class="col mt-4">
-                                            <select name="cours_id" id="cours_id" class="form-control" required="required">
-                                                <option value= "" selected >{{$status == 1? $cour->intitule : "Veuillez choisir un cours"}}</option>
+                                        @if (Session::has('err_time'))
+                                            <div class="alert alert-danger" role="alert">
+                                                <strong class="mb-5" style="color: white; font-weight: bold">{{Session::get('err_time')}}</strong>
+                                            </div>
+                                        @endif
+                                        @if (Session::has('err_date'))
+                                            <div class="alert alert-danger" role="alert">
+                                                <strong class="mb-5" style="color: white; font-weight: bold">{{Session::get('err_date')}}</strong>
+                                            </div>
+                                        @endif
+                                        @if (Session::has('warning_date'))
+                                            <div class="alert alert-warning" role="alert">
+                                                <strong class="mb-5" style="color: white; font-weight: bold">{{Session::get('warning_date')}}</strong>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col mt-4">
+                                        <select name="cours_id" id="cours_id" class="form-control" required="required">
+                                            <option value="{{$status == 1? $cour->id : ""}}" selected >{{$status == 1? $cour->intitule : "Veuillez choisir un cours"}}</option>
                                                 @if (isset($course))
-                                                    @foreach ($course as $cour)
-                                                        <option value="{{ $cour->id }}">{{ $cour->intitule }}</option>
+                                                    @foreach ($course as $cours)
+                                                        <option value="{{ $cours->id }}">{{ $cours->intitule }}</option>
                                                     @endforeach
                                                 @endif
-                                            </select>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">

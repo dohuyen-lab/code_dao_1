@@ -59,18 +59,18 @@ class InformationController extends Controller
         $id = $request->idUser;
         $user = DB::table('users')->where('id', '=', $id)->first();
 
-        if($request->password){
-            $validatedData = $request->validate([
-                'newpassword' => 'min:8',
-                'password_confirmation'=>'required|same:newpassword',
-            ],[
-                'newpassword.required'=>'Mật khẩu không trùng khớp',
-                'password.min'=>'Mật khẩu phải lớn hơn 8 kí tự',
-            ]);
-        }
+        $validatedData = $request->validate([
+            'password' => 'min:8',
+            'newpassword' => 'min:8',
+            'password_confirmation'=>'required|same:newpassword',
+        ],[
+            'newpassword.min'=> 'Password must be longer than 8 characters',
+            'password_confirmation.same'=>'Password verification does not match.',
+            'password.min'=>'Password must be longer than 8 characters',
+        ]);
 
         if ($request->newpassword != $request->password_confirmation) {
-            return redirect()->back()->with(['message'=>'Le mot de passe ne correspond pas']);
+            return redirect()->back()->with(['err_pass'=>'Le mot de passe ne correspond pas']);
         }
 
         if (Hash::check($request->password, $user->mdp)) {
