@@ -8,6 +8,11 @@
                 @csrf
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-8 col-xl-6">
+                        @if (Session::has('error'))
+                            <div class="alert alert-danger" role="alert">
+                                <strong style="color: white; font-weight: bold;">{{ Session::get('error') }}</strong>
+                            </div>
+                        @endif
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible" role="alert">
                                 <ul>

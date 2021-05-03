@@ -108,26 +108,35 @@
         </div>
     </div>
 
-    <!-- Modal chỉnh sửa thông tin người dùng  -->
-    <div class="modal fade" id="editPassword">
+    <!-- Modal chỉnh sửa mật khẩu người dùng  -->
+    @if (Session::has('err_pass') | $errors->any())
+        <div class="modal fade show" id="editPassword" style="padding-right: 17px; display: block;">
+    @else
+        <div class="modal fade" id="editPassword">
+    @endif
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-
-
                     <h4 class="modal-title">Changer mot de passe</h4>
-
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
                     <form id="edit_information_form" action="{{route('postChangePass')}}" method="POST"  enctype="multipart/form-data">
                         @csrf
-                        @if (Session::has('message'))
-                            <div class="alert alert-danger alert-dismissible" role="alert">
-                                {{Session::get('message')}}
+                        @if (Session::has('err_pass'))
+                            <div id="div_err_pass" class="alert alert-danger alert-dismissible" role="alert">
+                                {{Session::get('err_pass')}}
+                            </div>
+                        @elseif ($errors->any())
+                            <div id="div_err_password" class="alert alert-danger alert-dismissible" role="alert">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li class="text-white">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
                         @endif
                         <input hidden name="idUser" id="idUser" value="{{$formation->id}}" type="text">
@@ -148,7 +157,7 @@
                         </div>
                         <div class="form-group mt-5">
                             <button type="submit" class="btn btn-primary"><i class="fas fa-sync pr-1"></i>Mettre à jour</button>
-                            <button class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                            <button class="btn btn-danger" onclick="closemodal_pass('editPassword')" type="button" data-dismiss="modal">Fermer</button>
                         </div>
                     </form>
                 </div>
@@ -180,6 +189,18 @@
         $("#editPassword").modal('show');
     }
 
+    function closemodal_pass(text) {
+        console.log(`#${text}`);
+        $(`#${text}`).removeClass('show');
+        $(`#${text}`).css('display', 'none');
+        $(`input[name='password']`).val('');
+        $(`input[name='newpassword']`).val('');
+        $(`input[name='password_confirmation']`).val('');
+        $('#div_err_pass').css('display', 'none');
+        $('#div_err_password').css('display', 'none');
+        $(`#${text}`).modal('hide');
+    }
+
     function submitEdit(){
         event.preventDefault();
         var data = new FormData($("#editInformationModal form")[0]);
@@ -203,9 +224,7 @@
                 console.log(errors.errors);
                 $.each(errors.errors, function(i, val) {
                     $("#editInformationModal input[name=" + i + "]").siblings('.error').text(val[0]);
-
                 })
-
             }
         });
     }

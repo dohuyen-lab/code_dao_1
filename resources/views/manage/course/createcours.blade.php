@@ -20,6 +20,13 @@
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-8 col-lg-8 col-xl-6">
                                 <div class="row align-items-center">
+                                    @if (Session::has('err_date'))
+                                        <div class="alert alert-danger" role="alert">
+                                            <strong class="mb-5" style="color: white; font-weight: bold">{{Session::get('err_date')}}</strong>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="row align-items-center">
                                     <div class="col mt-4">
                                         @if($status == 0)
                                             <input type="text" class="form-control" placeholder="Nom" name="intitule" id="intitule">

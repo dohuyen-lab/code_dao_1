@@ -81,6 +81,10 @@ class ManageController extends Controller
         ]
         );
 
+        if ($request['password'] != $request['password_confirmation']) {
+            return redirect()->back()->with(['error' => 'password verification does not match.']);
+        }
+
         $formation_id = $request->formation_id ? $request->formation_id : 1;
 
         $user = new User();

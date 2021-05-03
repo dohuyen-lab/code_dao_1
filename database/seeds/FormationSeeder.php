@@ -22,7 +22,7 @@ class FormationSeeder extends Seeder
         $limit = 12;
 
         DB::table('formations')->insert([
-            'intitule' => 'Gao vien',
+            'intitule' => 'Enseignant',
             'deleted_at' => 1
         ]);
 

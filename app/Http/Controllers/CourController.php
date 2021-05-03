@@ -50,6 +50,27 @@ class CourController extends Controller
 
         $date_debut = $date.' '.$heure_debut;
         $date_fin = $date.' '.$heure_fin;
+
+        $planning = DB::table('plannings')
+        ->where('cours_id', '=', $cours_id)
+        ->select('date_debut', 'date_fin')
+        ->first();
+
+        $today = date('y-m-d');
+
+        if (strtotime($date) < strtotime($today)) {
+            return redirect()->back()->with(['err_date' => 'Start date must come after End date']);
+        }
+
+        if (strtotime($date_debut) > strtotime($date_fin)) {
+            return redirect()->back()->with(['err_time' => 'Start time must come after End time']);
+        }
+
+        if (strtotime($planning[0]['date_debut']) > strtotime($date) || strtotime($date) > strtotime($planning[0]['date_fin']))
+        {
+            return redirect()->back()->with(['warning_date' => 'Start time must come after End time']);
+        }
+
         DB::table('plannings')->insert([
             'cours_id' => $cours_id,
             'date_debut' => $date_debut,
@@ -66,6 +87,10 @@ class CourController extends Controller
         $formation_id = $request['formation_id'];
         $date_debut = $request['date_debut'];
         $date_fin = $request['date_fin'];
+
+        if (strtotime($date_debut) > strtotime($date_fin)) {
+            return redirect()->back()->with(['err_date' => 'Start date must come after End date']);
+        }
 
         DB::table('cours')->insert([
             'intitule' => $intitule,
@@ -144,7 +169,7 @@ class CourController extends Controller
 
         $user = Session::get('user');
 
-        if ($user[0][0]->type == 'admin') {
+        if ($user[0][0]->type == 'admin') { //admin
             $teacher = DB::table('users')
                         ->where('users.type', '=', 'enseignant')
                         ->get();
@@ -156,16 +181,23 @@ class CourController extends Controller
                 'cour' => $cour_edit[0]
             ]);
         }
+        // teacher
         $teacher = DB::table('cours')
                         ->select('users.nom','users.prenom','users.id')
                         ->join('users','users.id','=','cours.user_id')
                         ->where('cours.id', '=', $cour_id)
                         ->get();
+        $course = DB::table('cours')
+                    ->where('user_id', '=', $user[0][0]->id)
+                    ->where('id', '<>', $cour_id)
+                    ->get();
+
         return view('teacher.cours.createcours',[
             'teachers' => $teacher,
             'formations' => $formations,
             'status' => 1,
-            'cour' => $cour_edit[0]
+            'cour' => $cour_edit[0],
+            'course' => $course
         ]);
     }
 
